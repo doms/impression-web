@@ -19,21 +19,24 @@
     <!-- main title -->
     <div id="container">
         <h1 class="main-title animated fadeInUpBig">Impression</h1>
-    </div>
-    <!-- particles container -->
-    <!-- <div id="particles-js"></div> -->
 
-    <!-- search bar -->
-    <div id="middle">
-        <form class="form-wrapper cf animated fadeInDownBig" onsubmit="return false;">
-            <button onclick="processImage()" type="button">Analyze</button>
-            <input id="urlInfo" type="text" onkeyup="handle(event);" placeholder="Image URL or drag and drop">
-        </form>
+        <!-- search bar -->
+        <div>
+            <form class="form-wrapper cf animated fadeInDownBig" onsubmit="return false;">
+                <button onclick="processImage()" type="button">Analyze</button>
+                <input id="urlInfo" type="text" onkeyup="handle(event);" placeholder="Image URL or drag and drop">
+            </form>
+        </div>
     </div>
+
+    <!-- particlesJS -->
+    <div id="particles-js"></div>
+
 
 </body>
+
 <!-- scripts -->
-<!-- <script src="js/particles.min.js"></script> -->
+<script src="js/particles.min.js"></script>
 <script src="js/app.js"></script>
 <script src="js/microsoft.js"></script>
 <script src="js/tts.js"></script>
