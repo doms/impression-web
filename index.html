@@ -9,27 +9,54 @@
     <meta name="author" content="Dominic Young">
 
     <link href="css/style.css" rel="stylesheet" type="text/css">
+    <link href="css/modal.css" rel="stylesheet" type="text/css">
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css">
 </head>
 
 <body>
-    <!-- main title -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(':button').on('click', function () {
+                $('.modal-wrapper').toggleClass('open');
+                $('#particles-js').toggleClass('blur-it');
+                return false;
+            });
+        });
+    </script>
     <div id="container">
+        <!-- main title -->
         <h1 class="main-title animated fadeInUpBig">Impression</h1>
 
         <!-- search bar -->
         <div>
             <form class="form-wrapper cf animated fadeInDownBig" onsubmit="return false;">
                 <button onclick="processImage()" type="button">Analyze</button>
-                <input id="urlInfo" type="text" onkeyup="handle(event);" placeholder="Image URL or drag and drop">
+                <input id="urlInfo" type="text" onkeyup="handle(event);" placeholder="Image URL (file browser coming soon™)">
             </form>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal-wrapper">
+            <div class="modal">
+                <div class="head">
+                    <a class="btn-close trigger" href="/">
+              <i class="fa fa-times" aria-hidden="true"></i>
+            </a>
+                </div>
+                <div class="content">
+                    <div class="good-job">
+                        <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                        <h1>Good Job!</h1>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
     <!-- particlesJS -->
     <div id="particles-js"></div>
-
-
 </body>
 
 <!-- scripts -->
