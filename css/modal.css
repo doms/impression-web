@@ -89,11 +89,15 @@ a.btn {
   padding: 10%;
 }
 
-.good-job {
-  text-align: center;
-  font-family: "Montserrat", Arial, Helvetica, sans-serif;
-  color: #3f3a3b;
+#sourceImage {
+  display: block;
+  margin: -5% auto;
 }
+
+#modal-results {
+  margin: 10% 6% auto;
+}
+
 .good-job .fa-thumbs-o-up {
   font-size: 60px;
 }

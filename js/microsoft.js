@@ -20,7 +20,7 @@ function processImage() {
 
   // Display the image.
   var sourceImageUrl = document.getElementById("urlInfo").value;
-  // document.querySelector("#sourceImage").src = sourceImageUrl;
+  document.querySelector("#sourceImage").src = sourceImageUrl;
 
   // Perform the REST API call.
   $.ajax({
@@ -41,11 +41,15 @@ function processImage() {
       // Parse info we want from results
       var results = JSON.parse(JSON.stringify(data, null, 2));
       console.log(results.description);
-      alert(
-        "I am " +
+
+      // text description
+      $(".results").append(
+        "<h1 id='modal-results'>" +
+          "I am " +
           (results.description.captions[0].confidence * 100).toFixed(1) +
           "% sure that this is " +
-          results.description.captions[0].text
+          results.description.captions[0].text +
+          "</h1>"
       );
     })
     .fail(function(jqXHR, textStatus, errorThrown) {
