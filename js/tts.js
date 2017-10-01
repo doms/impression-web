@@ -1,8 +1,5 @@
-// set default voice to english woman for now
-responsiveVoice.setDefaultVoice("US English Female");
-
 // get text to read from input box
-var textToSpeak = document.getElementById("results").value;
+// var textToSpeak = document.getElementById("results").value;
 
 function handleVoice() {
   // read it out loud
