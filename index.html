@@ -12,6 +12,8 @@
     <link href="css/modal.css" rel="stylesheet" type="text/css">
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
     <script src="https://code.responsivevoice.org/responsivevoice.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css">
 </head>
@@ -19,7 +21,7 @@
 <body>
     <script type="text/javascript">
         $(document).ready(function () {
-            $(':button').on('click', function () {
+            $('#analyze :button').on('click', function () {
                 $('.modal-wrapper').toggleClass('open');
                 $('#particles-js').toggleClass('blur-it');
                 return false;
@@ -31,11 +33,16 @@
         <h1 class="main-title animated fadeInUpBig">Impression</h1>
 
         <!-- search bar -->
-        <div>
-            <form class="form-wrapper cf animated fadeInDownBig" onsubmit="return false;">
-                <button onclick="processImage()" type="button">Analyze</button>
-                <input id="urlInfo" type="text" onkeyup="handle(event);" placeholder="Image URL (file browser coming soon™)">
+        <div class="form-group animated fadeInDownBig">
+            <form class="input-group input-file" id="custom" name="" onsubmit="return false;">
+                <input type="text" id="file" accept="image/*" class="form-control" placeholder='Paste an Image URL or Choose a file...' />
+                <span class="input-group-btn">
+                    <button class="btn btn-default btn-choose" type="button">Browse...</button>
+                </span>
             </form>
+            <div class="text-center">
+                <button type="button" onclick="processImage()" class="btn btn-primary btn-lg">Analyze</button>
+            </div>
         </div>
 
         <!-- Modal -->
@@ -43,8 +50,8 @@
             <div class="modal">
                 <div class="head">
                     <a class="btn-close trigger" href="/impression-web">
-              <i class="fa fa-times" aria-hidden="true"></i>
-            </a>
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </a>
                 </div>
                 <div class="content">
                     <div class="results">
@@ -61,7 +68,6 @@
 
 <!-- scripts -->
 <script src="js/particles.min.js"></script>
-<script src="js/pace.min.js"></script>
 <script src="js/app.js"></script>
 <script src="js/microsoft.js"></script>
 <script src="js/tts.js"></script>

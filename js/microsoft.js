@@ -1,10 +1,3 @@
-function handle(e) {
-  if (e.keyCode === 13) {
-    processImage();
-  }
-  return false;
-}
-
 function processImage() {
   // Get new key: https://azure.microsoft.com/en-gb/try/cognitive-services/
   var subscriptionKey = "2d23052d48564cf19b54bb302da30626";
@@ -19,8 +12,17 @@ function processImage() {
   };
 
   // Display the image.
-  var sourceImageUrl = document.getElementById("urlInfo").value;
+  var sourceImageUrl = getDataUri(document.getElementById("test").value);
   document.querySelector("#sourceImage").src = sourceImageUrl;
+
+  console.warn(sourceImageUrl);
+  /*
+  Input requirements:
+
+  Supported image formats: JPEG, PNG, GIF, BMP.
+  Image file size must be less than 4MB.
+  Image dimensions must be at least 50 x 50.
+  */
 
   // Perform the REST API call.
   $.ajax({
@@ -28,7 +30,7 @@ function processImage() {
 
     // Request headers.
     beforeSend: function(xhrObj) {
-      xhrObj.setRequestHeader("Content-Type", "application/json");
+      xhrObj.setRequestHeader("Content-Type", "application/octet-stream");
       xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key", subscriptionKey);
     },
 
@@ -40,7 +42,8 @@ function processImage() {
     .done(function(data) {
       // Parse info we want from results
       var results = JSON.parse(JSON.stringify(data, null, 2));
-      console.log(results.description);
+
+      // console.log(results.description);
 
       // text description
       $(".results").append(
