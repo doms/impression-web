@@ -32,16 +32,18 @@
         <!-- main title -->
         <h1 class="main-title animated fadeInUpBig">Impression</h1>
 
-        <!-- search bar -->
+        <!-- file browser & search bar -->
         <div class="form-group animated fadeInDownBig">
-            <form class="input-group input-file" id="custom" name="" onsubmit="return false;">
-                <input type="text" id="file" accept="image/*" class="form-control" placeholder='Paste an Image URL or Choose a file...' />
+            <div class="input-group input-file" id="custom">
+                <input type="text" class="form-control" id="url" placeholder='Image URL...' />
                 <span class="input-group-btn">
-                    <button class="btn btn-default btn-choose" type="button">Browse...</button>
+                    <button class="btn btn-default btn-choose" type="button">
+                        <i class="fa fa-picture-o" aria-hidden="true"></i>
+                    </button>
                 </span>
-            </form>
+            </div>
             <div class="text-center">
-                <button type="button" onclick="processImage()" class="btn btn-primary btn-lg">Analyze</button>
+                <button type="button" id="analyze" onclick="processImage()" class="btn btn-primary btn-lg">Analyze</button>
             </div>
         </div>
 
