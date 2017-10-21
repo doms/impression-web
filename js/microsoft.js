@@ -1,3 +1,5 @@
+// local files are weird, so you have to convert them to get them to work
+
 function processImage() {
   // Get new key: https://azure.microsoft.com/en-gb/try/cognitive-services/
   var subscriptionKey = "2d23052d48564cf19b54bb302da30626";
@@ -11,11 +13,28 @@ function processImage() {
     language: "en"
   };
 
-  // Display the image.
-  var sourceImageUrl = getDataUri(document.getElementById("test").value);
+  var dataInBase64;
+  var dataInBinary;
+
+  var sourceImageUrl = document.getElementById("url").value;
   document.querySelector("#sourceImage").src = sourceImageUrl;
 
-  console.warn(sourceImageUrl);
+  // check if image was uploaded or if from URL
+  if (sourceImageUrl.indexOf("C:") > -1) {
+    dataInBase64 = getBase64Image(
+      $(".results")
+        .nextAll("img")
+        .first()
+    );
+
+    console.log("DATA IN BASE64:", dataInBase64);
+
+    // get raw binary from encoded image
+    dataInBinary = binEncode(dataInBase64);
+  } else {
+    // something
+  }
+
   /*
   Input requirements:
 
@@ -24,26 +43,41 @@ function processImage() {
   Image dimensions must be at least 50 x 50.
   */
 
+  console.log("sourceImageUrl:", sourceImageUrl);
+
+  // dynamically create request header
+  var headerType =
+    sourceImageUrl.indexOf("data:image") > -1
+      ? "multipart/form-data"
+      : "application/json";
+  console.log("headerType: ", headerType);
+
+  // TODO: set data type depending on header
+  var inputType =
+    headerType === "multipart/form-data"
+      ? dataInBinary
+      : '{"url": ' + '"' + sourceImageUrl + '"}';
+
   // Perform the REST API call.
   $.ajax({
     url: uriBase + "?" + $.param(params),
 
     // Request headers.
     beforeSend: function(xhrObj) {
-      xhrObj.setRequestHeader("Content-Type", "application/octet-stream");
+      xhrObj.setRequestHeader("Content-Type", headerType);
       xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key", subscriptionKey);
     },
 
     type: "POST",
 
     // Request body.
-    data: '{"url": ' + '"' + sourceImageUrl + '"}'
+    data: inputType
   })
     .done(function(data) {
       // Parse info we want from results
       var results = JSON.parse(JSON.stringify(data, null, 2));
 
-      // console.log(results.description);
+      console.log(results.description);
 
       // text description
       $(".results").append(
