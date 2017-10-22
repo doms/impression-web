@@ -1,161 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Lobster);
 
-/* =============================================================================
-   HTML5 CSS Reset Minified - Eric Meyer
-   ========================================================================== */
-
-html,
-body,
-div,
-span,
-object,
-iframe,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-blockquote,
-pre,
-abbr,
-address,
-cite,
-code,
-del,
-dfn,
-em,
-img,
-ins,
-kbd,
-q,
-samp,
-small,
-strong,
-sub,
-sup,
-var,
-b,
-i,
-dl,
-dt,
-dd,
-ol,
-ul,
-li,
-fieldset,
-form,
-label,
-legend,
-table,
-caption,
-tbody,
-tfoot,
-thead,
-tr,
-th,
-td,
-article,
-aside,
-canvas,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-menu,
-nav,
-section,
-summary,
-time,
-mark,
-audio,
-video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  outline: 0;
-  font-size: 100%;
-  vertical-align: baseline;
-  background: transparent;
-}
-body {
-  line-height: 1;
-}
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-menu,
-nav,
-section {
-  display: block;
-}
-nav ul {
-  list-style: none;
-}
-blockquote,
-q {
-  quotes: none;
-}
-blockquote:before,
-blockquote:after,
-q:before,
-q:after {
-  content: none;
-}
-a {
-  margin: 0;
-  padding: 0;
-  font-size: 100%;
-  vertical-align: baseline;
-  background: transparent;
-  text-decoration: none;
-}
-mark {
-  background-color: #ff9;
-  color: #000;
-  font-style: italic;
-  font-weight: bold;
-}
-del {
-  text-decoration: line-through;
-}
-abbr[title],
-dfn[title] {
-  border-bottom: 1px dotted;
-  cursor: help;
-}
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-hr {
-  display: block;
-  height: 1px;
-  border: 0;
-  border-top: 1px solid #ccc;
-  margin: 1em 0;
-  padding: 0;
-}
-input,
-select {
-  vertical-align: middle;
-}
-li {
-  list-style: none;
-}
-
-html {
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-
 body {
   font: normal 75% Arial, Helvetica, sans-serif;
 }
@@ -172,7 +16,36 @@ body {
   font-size: 75px;
   font-family: "Lobster";
   color: white;
-  text-shadow: 0.09em 0.09em #3d3805;
+  text-shadow: 0.09em 0.09em #000;
+}
+
+#analyze {
+}
+
+#custom {
+  margin: 5% auto;
+  width: 50%;
+}
+
+.btn {
+  position: relative;
+  border: 0 !important;
+  &:focus {
+    outline: 0;
+  }
+  &:hover {
+    top: 2px;
+  }
+  &:active {
+    top: 6px;
+  }
+  cursor: pointer;
+  -webkit-font-smoothing: antialiased;
+  font-weight: bold !important;
+}
+
+.btn-primary {
+  .btn(#428bca);
 }
 
 /* ParticleJS */
@@ -184,244 +57,4 @@ body {
   z-index: -10;
   top: 0;
   left: 0;
-}
-
-/* PACE */
-.pace {
-  -webkit-pointer-events: none;
-  pointer-events: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
-}
-
-.pace-inactive {
-  display: none;
-}
-
-.pace .pace-progress {
-  background: #29d;
-  position: fixed;
-  z-index: 2000;
-  top: 0;
-  right: 100%;
-  width: 100%;
-  height: 2px;
-}
-
-.pace .pace-progress-inner {
-  display: block;
-  position: absolute;
-  right: 0px;
-  width: 100px;
-  height: 100%;
-  box-shadow: 0 0 10px #29d, 0 0 5px #29d;
-  opacity: 1;
-  -webkit-transform: rotate(3deg) translate(0px, -4px);
-  -moz-transform: rotate(3deg) translate(0px, -4px);
-  -ms-transform: rotate(3deg) translate(0px, -4px);
-  -o-transform: rotate(3deg) translate(0px, -4px);
-  transform: rotate(3deg) translate(0px, -4px);
-}
-
-.pace .pace-activity {
-  display: block;
-  position: fixed;
-  z-index: 2000;
-  top: 15px;
-  right: 15px;
-  width: 14px;
-  height: 14px;
-  border: solid 2px transparent;
-  border-top-color: #29d;
-  border-left-color: #29d;
-  border-radius: 10px;
-  -webkit-animation: pace-spinner 400ms linear infinite;
-  -moz-animation: pace-spinner 400ms linear infinite;
-  -ms-animation: pace-spinner 400ms linear infinite;
-  -o-animation: pace-spinner 400ms linear infinite;
-  animation: pace-spinner 400ms linear infinite;
-}
-
-@-webkit-keyframes pace-spinner {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
-@-moz-keyframes pace-spinner {
-  0% {
-    -moz-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -moz-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
-@-o-keyframes pace-spinner {
-  0% {
-    -o-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -o-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
-@-ms-keyframes pace-spinner {
-  0% {
-    -ms-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -ms-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
-@keyframes pace-spinner {
-  0% {
-    transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
-
-.cf:before,
-.cf:after {
-  content: "";
-  display: table;
-}
-
-.cf:after {
-  clear: both;
-}
-
-.cf {
-  zoom: 1;
-}
-
-/* Search Box */
-.form-wrapper {
-  width: 450px;
-  margin: 5% auto;
-  background: #444;
-  background: rgba(0, 0, 0, 0.2);
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
-  border-radius: 10px;
-  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4) inset,
-    0 1px 0 rgba(255, 255, 255, 0.2);
-  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4) inset,
-    0 1px 0 rgba(255, 255, 255, 0.2);
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4) inset,
-    0 1px 0 rgba(255, 255, 255, 0.2);
-}
-
-.form-wrapper input {
-  width: 330px;
-  height: 20px;
-  padding: 10px 5px;
-  float: left;
-  font: bold 15px "lucida sans", "trebuchet MS", "Tahoma";
-  border: 0;
-  background: #eee;
-  -moz-border-radius: 3px 0 0 3px;
-  -webkit-border-radius: 3px 0 0 3px;
-  border-radius: 3px 0 0 3px;
-}
-
-.form-wrapper input:focus {
-  outline: 0;
-  background: #fff;
-  -moz-box-shadow: 0 0 2px rgba(0, 0, 0, 0.8) inset;
-  -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.8) inset;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.8) inset;
-}
-
-.form-wrapper input::-webkit-input-placeholder {
-  color: #999;
-  font-weight: normal;
-  font-style: italic;
-}
-
-.form-wrapper input:-moz-placeholder {
-  color: #999;
-  font-weight: normal;
-  font-style: italic;
-}
-
-.form-wrapper input:-ms-input-placeholder {
-  color: #999;
-  font-weight: normal;
-  font-style: italic;
-}
-
-.form-wrapper button {
-  overflow: visible;
-  position: relative;
-  float: right;
-  border: 0;
-  padding: 0;
-  cursor: pointer;
-  height: 40px;
-  width: 110px;
-  font: bold 15px/40px "lucida sans", "trebuchet MS", "Tahoma";
-  color: #fff;
-  text-transform: uppercase;
-  background: #d83c3c;
-  -moz-border-radius: 0 3px 3px 0;
-  -webkit-border-radius: 0 3px 3px 0;
-  border-radius: 0 3px 3px 0;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
-}
-
-.form-wrapper button:hover {
-  background: #e54040;
-}
-
-.form-wrapper button:active,
-.form-wrapper button:focus {
-  background: #c42f2f;
-}
-
-.form-wrapper button:before {
-  content: "";
-  position: absolute;
-  border-width: 8px 8px 8px 0;
-  border-style: solid solid solid none;
-  border-color: transparent #d83c3c transparent;
-  top: 12px;
-  left: -6px;
-}
-
-.form-wrapper button:hover:before {
-  border-right-color: #e54040;
-}
-
-.form-wrapper button:focus:before {
-  border-right-color: #c42f2f;
-}
-
-.form-wrapper button::-moz-focus-inner {
-  border: 0;
-  padding: 0;
-}
-.byline p {
-  text-align: center;
-  color: #c6c6c6;
-  font: bold 18px Arial, Helvetica, Sans-serif;
-  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
-}
-
-.byline p a {
-  color: #d83c3c;
-  text-decoration: none;
 }
