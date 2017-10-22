@@ -34,24 +34,27 @@
 
         <!-- file browser & search bar -->
         <div class="form-group animated fadeInDownBig">
-            <div class="input-group input-file" id="custom">
+            <div class="input-group" id="custom">
                 <input type="text" class="form-control" id="url" placeholder='Image URL...' />
                 <span class="input-group-btn">
-                    <button class="btn btn-default btn-choose" type="button" style="background-color: red;">
-                        <i class="fa fa-cloud-upload" aria-hidden="true" style="color: white ;"></i>
+                    <button class="btn btn-default btn-choose" id="analyze" type="button" onclick="processImage();" style="background-color: red;">
+                        <i class="fa fa-search-plus" aria-hidden="true" style="color: white ;"></i>
                     </button>
                 </span>
             </div>
-            <div class="text-center">
-                <button type="button" id="analyze" onclick="processImage()" class="btn btn-primary btn-lg">Analyze</button>
+            <div class="text-center input-file">
+                <button type="button" id="url" class="btn btn-primary btn-lg" name="dom-file-upload">Browse...</button>
             </div>
         </div>
+
+        <!-- Terrible placement, but needed a global variable for this... -->
+        <img id="img-preview" width="400" style="margin: 10% 25% auto;" />
 
         <!-- Modal -->
         <div class="modal-wrapper">
             <div class="modal">
                 <div class="head">
-                    <a class="btn-close trigger" href="/impression-web">
+                    <a class="btn-close trigger" href="#">
                         <i class="fa fa-times" aria-hidden="true"></i>
                     </a>
                 </div>

@@ -10,28 +10,29 @@ function handle(e) {
   return false;
 }
 
-function getBase64Image(url) {
-  var img = new Image();
+function previewFile() {
+  var preview = document.getElementById("img-preview");
 
-  img.setAttribute("crossOrigin", "anonymous");
+  var file = document.querySelector("input[type=file]").files[0];
+  var reader = new FileReader();
 
-  img.onload = function() {
-    var canvas = document.createElement("canvas");
-    canvas.width = this.width;
-    canvas.height = this.height;
+  reader.addEventListener(
+    "load",
+    function() {
+      preview.src = reader.result;
 
-    var ctx = canvas.getContext("2d");
-    ctx.drawImage(this, 0, 0);
+      // send to API to get analyzed
+      processImage();
+    },
+    false
+  );
 
-    var dataURL = canvas.toDataURL("image/png");
-
-    alert(dataURL.replace(/^data:image\/(png|jpg);base64,/, ""));
-  };
-
-  img.src = url;
+  if (file) {
+    reader.readAsDataURL(file);
+  }
 }
 
-// base64 -> raw binary (because Microsoft is childish)
+// base64 -> raw binary
 function binEncode(data) {
   var binArray = [];
   var datEncode = "";
@@ -53,7 +54,7 @@ function binEncode(data) {
     }
     return s;
   }
-  console.log("binArray: ", binArray);
+  return binArray.join("");
 }
 
 // handle file upload
@@ -65,21 +66,13 @@ function bs_input_file() {
         .hasClass("input-ghost")
     ) {
       var element = $(
-        "<input type='file' id='test' class='input-ghost' style='visibility:hidden; height:0'>"
+        "<input type='file' onchange='previewFile();' id='test' class='input-ghost' style='visibility:hidden; height:0'>"
       );
       element.attr("name", $(this).attr("name"));
 
-      // update the input text when we upload an image
-      element.change(function() {
-        element
-          .next(element)
-          .find("input")
-          .val(element.val());
-      });
-
       // this allows for the custom image upload button rather than the gross "choose file" button
       $(this)
-        .find("button.btn-choose")
+        .find("button.btn-primary")
         .click(function() {
           element.click();
         });

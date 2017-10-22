@@ -1,4 +1,10 @@
-// local files are weird, so you have to convert them to get them to work
+/*
+  Input requirements:
+
+  Supported image formats: JPEG, PNG, GIF, BMP.
+  Image file size must be less than 4MB.
+  Image dimensions must be at least 50 x 50.
+*/
 
 function processImage() {
   // Get new key: https://azure.microsoft.com/en-gb/try/cognitive-services/
@@ -13,50 +19,30 @@ function processImage() {
     language: "en"
   };
 
-  var dataInBase64;
-  var dataInBinary;
-
+  var preview = document.getElementById("img-preview").src;
   var sourceImageUrl = document.getElementById("url").value;
-  document.querySelector("#sourceImage").src = sourceImageUrl;
 
-  // check if image was uploaded or if from URL
-  if (sourceImageUrl.indexOf("C:") > -1) {
-    dataInBase64 = getBase64Image(
-      $(".results")
-        .nextAll("img")
-        .first()
-    );
-
-    console.log("DATA IN BASE64:", dataInBase64);
-
-    // get raw binary from encoded image
-    dataInBinary = binEncode(dataInBase64);
-  } else {
-    // something
-  }
-
-  /*
-  Input requirements:
-
-  Supported image formats: JPEG, PNG, GIF, BMP.
-  Image file size must be less than 4MB.
-  Image dimensions must be at least 50 x 50.
-  */
-
-  console.log("sourceImageUrl:", sourceImageUrl);
+  console.log("preview.src:", preview);
 
   // dynamically create request header
   var headerType =
-    sourceImageUrl.indexOf("data:image") > -1
-      ? "multipart/form-data"
-      : "application/json";
+    sourceImageUrl === "" ? "multipart/form-data" : "application/json";
   console.log("headerType: ", headerType);
 
-  // TODO: set data type depending on header
+  // encode image to raw binary
+  var dataInBinary;
+  var trimPreview = preview.replace(/^data:image\/(png|jpg);base64,/g, "");
+  console.log("trimPreview:", trimPreview);
+  if (preview) {
+    dataInBinary = binEncode(trimPreview);
+  }
+
+  // set data to send depending on headerType
   var inputType =
     headerType === "multipart/form-data"
       ? dataInBinary
       : '{"url": ' + '"' + sourceImageUrl + '"}';
+  console.log("inputType:", inputType);
 
   // Perform the REST API call.
   $.ajax({
@@ -101,4 +87,7 @@ function processImage() {
           : jQuery.parseJSON(jqXHR.responseText).message;
       alert(errorString);
     });
+
+  // clear input
+  document.getElementById("url").value = "";
 }
