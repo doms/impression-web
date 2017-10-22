@@ -12,12 +12,13 @@ function handle(e) {
 
 function previewFile() {
   var preview = document.getElementById("img-preview");
+  var fileType;
 
   var file = document.querySelector("input[type=file]").files[0];
   var reader = new FileReader();
 
   reader.addEventListener(
-    "load",
+    "loadend",
     function() {
       preview.src = reader.result;
 
@@ -28,33 +29,33 @@ function previewFile() {
   );
 
   if (file) {
+    fileType = file.type;
     reader.readAsDataURL(file);
   }
 }
 
-// base64 -> raw binary
-function binEncode(data) {
-  var binArray = [];
-  var datEncode = "";
+// https://stackoverflow.com/a/34064793
+function makeBlob(dataURL) {
+  var BASE64_MARKER = ";base64,";
+  if (dataURL.indexOf(BASE64_MARKER) == -1) {
+    var parts = dataURL.split(",");
+    var contentType = parts[0].split(":")[1];
+    var raw = decodeURIComponent(parts[1]);
+    return new Blob([raw], { type: contentType });
+  }
 
-  for (i = 0; i < data.length; i++) {
-    binArray.push(data[i].charCodeAt(0).toString(2));
+  var parts = dataURL.split(BASE64_MARKER);
+  var contentType = parts[0].split(":")[1];
+  var raw = window.atob(parts[1]);
+  var rawLength = raw.length;
+
+  var uInt8Array = new Uint8Array(rawLength);
+
+  for (var i = 0; i < rawLength; ++i) {
+    uInt8Array[i] = raw.charCodeAt(i);
   }
-  for (j = 0; j < binArray.length; j++) {
-    var pad = padding_left(binArray[j], "0", 8);
-    datEncode += pad + " ";
-  }
-  function padding_left(s, c, n) {
-    if (!s || !c || s.length >= n) {
-      return s;
-    }
-    var max = (n - s.length) / c.length;
-    for (var i = 0; i < max; i++) {
-      s = c + s;
-    }
-    return s;
-  }
-  return binArray.join("");
+
+  return new Blob([uInt8Array], { type: contentType });
 }
 
 // handle file upload

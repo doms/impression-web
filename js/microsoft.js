@@ -26,21 +26,13 @@ function processImage() {
 
   // dynamically create request header
   var headerType =
-    sourceImageUrl === "" ? "multipart/form-data" : "application/json";
+    sourceImageUrl === "" ? "application/octet-stream" : "application/json";
   console.log("headerType: ", headerType);
-
-  // encode image to raw binary
-  var dataInBinary;
-  var trimPreview = preview.replace(/^data:image\/(png|jpg);base64,/g, "");
-  console.log("trimPreview:", trimPreview);
-  if (preview) {
-    dataInBinary = binEncode(trimPreview);
-  }
 
   // set data to send depending on headerType
   var inputType =
-    headerType === "multipart/form-data"
-      ? dataInBinary
+    headerType === "application/octet-stream"
+      ? makeBlob(preview)
       : '{"url": ' + '"' + sourceImageUrl + '"}';
   console.log("inputType:", inputType);
 
@@ -55,6 +47,8 @@ function processImage() {
     },
 
     type: "POST",
+
+    processData: false,
 
     // Request body.
     data: inputType
