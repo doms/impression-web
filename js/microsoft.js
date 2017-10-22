@@ -19,10 +19,15 @@ function processImage() {
     language: "en"
   };
 
-  var preview = document.getElementById("img-preview").src;
+  var preview = document.getElementById("sourceImage").src;
   var sourceImageUrl = document.getElementById("url").value;
 
   console.log("preview.src:", preview);
+
+  // add photo to img tag if from URL
+  if (sourceImageUrl) {
+    document.querySelector("#sourceImage").src = sourceImageUrl;
+  }
 
   // dynamically create request header
   var headerType =
@@ -54,13 +59,15 @@ function processImage() {
     data: inputType
   })
     .done(function(data) {
+      // $("div.modal-backdrop").remove();
+
       // Parse info we want from results
       var results = JSON.parse(JSON.stringify(data, null, 2));
 
       console.log(results.description);
 
       // text description
-      $(".results").append(
+      $(".modal-body").append(
         "<h1 id='modal-results'>" +
           "I am " +
           (results.description.captions[0].confidence * 100).toFixed(1) +
@@ -68,6 +75,9 @@ function processImage() {
           results.description.captions[0].text +
           "</h1>"
       );
+
+      // $(".modal-results").remove("h1");
+      $("#myModal").modal("show");
     })
     .fail(function(jqXHR, textStatus, errorThrown) {
       // Display error message.

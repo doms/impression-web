@@ -11,7 +11,7 @@ function handle(e) {
 }
 
 function previewFile() {
-  var preview = document.getElementById("img-preview");
+  var preview = document.getElementById("sourceImage");
   var fileType;
 
   var file = document.querySelector("input[type=file]").files[0];

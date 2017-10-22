@@ -12,22 +12,15 @@
     <link href="css/modal.css" rel="stylesheet" type="text/css">
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
     <script src="https://code.responsivevoice.org/responsivevoice.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
         crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css">
 </head>
 
 <body>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#analyze :button').on('click', function () {
-                $('.modal-wrapper').toggleClass('open');
-                $('#particles-js').toggleClass('blur-it');
-                return false;
-            });
-        });
-    </script>
     <div id="container">
         <!-- main title -->
         <h1 class="main-title animated fadeInUpBig">Impression</h1>
@@ -46,22 +39,25 @@
                 <button type="button" id="url" class="btn btn-primary btn-lg" name="dom-file-upload">Browse...</button>
             </div>
         </div>
+    </div>
 
-        <!-- Terrible placement, but needed a global variable for this... -->
-        <img id="img-preview" width="400" style="margin: 10% 25% auto;" />
 
-        <!-- Modal -->
-        <div class="modal-wrapper">
-            <div class="modal">
-                <div class="head">
-                    <a class="btn-close trigger" href="#">
-                        <i class="fa fa-times" aria-hidden="true"></i>
-                    </a>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="ModalLabel">Results</h4>
                 </div>
-                <div class="content">
-                    <div class="results">
-                        <img id="sourceImage" width="400" />
-                    </div>
+                <div class="modal-body" id="modal-results">
+                    <img id="sourceImage" width="400" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" onclick="javascript:window.location.reload()" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="javascript:window.location.reload()">Save changes</button>
                 </div>
             </div>
         </div>
