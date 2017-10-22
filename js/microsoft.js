@@ -1,9 +1,10 @@
-function handle(e) {
-  if (e.keyCode === 13) {
-    processImage();
-  }
-  return false;
-}
+/*
+  Input requirements:
+
+  Supported image formats: JPEG, PNG, GIF, BMP.
+  Image file size must be less than 4MB.
+  Image dimensions must be at least 50 x 50.
+*/
 
 function processImage() {
   // Get new key: https://azure.microsoft.com/en-gb/try/cognitive-services/
@@ -18,9 +19,27 @@ function processImage() {
     language: "en"
   };
 
-  // Display the image.
-  var sourceImageUrl = document.getElementById("urlInfo").value;
-  document.querySelector("#sourceImage").src = sourceImageUrl;
+  var preview = document.getElementById("sourceImage").src;
+  var sourceImageUrl = document.getElementById("url").value;
+
+  console.log("preview.src:", preview);
+
+  // add photo to img tag if from URL
+  if (sourceImageUrl) {
+    document.querySelector("#sourceImage").src = sourceImageUrl;
+  }
+
+  // dynamically create request header
+  var headerType =
+    sourceImageUrl === "" ? "application/octet-stream" : "application/json";
+  console.log("headerType: ", headerType);
+
+  // set data to send depending on headerType
+  var inputType =
+    headerType === "application/octet-stream"
+      ? makeBlob(preview)
+      : '{"url": ' + '"' + sourceImageUrl + '"}';
+  console.log("inputType:", inputType);
 
   // Perform the REST API call.
   $.ajax({
@@ -28,22 +47,27 @@ function processImage() {
 
     // Request headers.
     beforeSend: function(xhrObj) {
-      xhrObj.setRequestHeader("Content-Type", "application/json");
+      xhrObj.setRequestHeader("Content-Type", headerType);
       xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key", subscriptionKey);
     },
 
     type: "POST",
 
+    processData: false,
+
     // Request body.
-    data: '{"url": ' + '"' + sourceImageUrl + '"}'
+    data: inputType
   })
     .done(function(data) {
+      // $("div.modal-backdrop").remove();
+
       // Parse info we want from results
       var results = JSON.parse(JSON.stringify(data, null, 2));
+
       console.log(results.description);
 
       // text description
-      $(".results").append(
+      $(".modal-body").append(
         "<h1 id='modal-results'>" +
           "I am " +
           (results.description.captions[0].confidence * 100).toFixed(1) +
@@ -51,6 +75,9 @@ function processImage() {
           results.description.captions[0].text +
           "</h1>"
       );
+
+      // $(".modal-results").remove("h1");
+      $("#myModal").modal("show");
     })
     .fail(function(jqXHR, textStatus, errorThrown) {
       // Display error message.
@@ -64,4 +91,7 @@ function processImage() {
           : jQuery.parseJSON(jqXHR.responseText).message;
       alert(errorString);
     });
+
+  // clear input
+  document.getElementById("url").value = "";
 }
