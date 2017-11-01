@@ -8,7 +8,7 @@
 
 function processImage() {
   // Get new key: https://azure.microsoft.com/en-gb/try/cognitive-services/
-  var subscriptionKey = "2d23052d48564cf19b54bb302da30626";
+  var subscriptionKey = "9e1166d642c946c182e75b8cc4cf5dda";
   var uriBase =
     "https://westcentralus.api.cognitive.microsoft.com/vision/v1.0/analyze";
 
