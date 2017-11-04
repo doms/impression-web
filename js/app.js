@@ -67,7 +67,7 @@ function bs_input_file() {
         .hasClass("input-ghost")
     ) {
       var element = $(
-        "<input type='file' onchange='previewFile();' id='test' class='input-ghost' style='visibility:hidden; height:0'>"
+        "<input type='file' accept='image/*' onchange='previewFile();' id='test' class='input-ghost' style='visibility:hidden; height:0'>"
       );
       element.attr("name", $(this).attr("name"));
 
