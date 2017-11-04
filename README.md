@@ -3,6 +3,13 @@
 
 ![Main Page](https://user-images.githubusercontent.com/8808097/32409811-11b71898-c181-11e7-85ba-c13af47d675f.png)
 
+How to use:
+- Paste a URL to an image and  or choose an image from your device
+- Sit tight for a few seconds as the data from the image to processed with Microsoft Cognitive Science API
+- Results will be returned in a modal with a statement saying what it believe the image to be
+
+**_(Disclaimer: not all results are correct, I do provide an accuracy score from the API with each result)_**
+
 To develop:
 - clone my repo or download zip
 - navigate to directory (impression-web)
