@@ -26,7 +26,7 @@
         <!-- file browser & search bar -->
         <div class="form-group animated fadeInDownBig">
             <div class="input-group" id="custom">
-                <input type="text" class="form-control" id="url" placeholder='Image URL...' />
+                <input type="text" onkeyup="handle(event)" class="form-control" id="url" placeholder='Image URL...' />
                 <span class="input-group-btn">
                     <button class="btn btn-default btn-choose" id="analyze" type="button" onclick="processImage();" style="background-color: red;">
                         <i class="fa fa-search-plus" aria-hidden="true" style="color: white ;"></i>
