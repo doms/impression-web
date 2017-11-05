@@ -7,7 +7,7 @@
 */
 
 function processImage() {
-  // Get new key: https://azure.microsoft.com/en-gb/try/cognitive-services/
+  // API key needed for access to Microsoft CogSci API
   var subscriptionKey = "9e1166d642c946c182e75b8cc4cf5dda";
   var uriBase =
     "https://westcentralus.api.cognitive.microsoft.com/vision/v1.0/analyze";
@@ -59,8 +59,6 @@ function processImage() {
     data: inputType
   })
     .done(function(data) {
-      // $("div.modal-backdrop").remove();
-
       // Parse info we want from results
       var results = JSON.parse(JSON.stringify(data, null, 2));
 
@@ -68,15 +66,14 @@ function processImage() {
 
       // text description
       $(".modal-body").append(
-        "<h1 id='modal-results'>" +
-          "I am " +
+        "<h1 id='results'>" +
+          "I am <strong>" +
           (results.description.captions[0].confidence * 100).toFixed(1) +
-          "% sure that this is " +
+          "%</strong> sure that this is " +
           results.description.captions[0].text +
           "</h1>"
       );
 
-      // $(".modal-results").remove("h1");
       $("#myModal").modal("show");
     })
     .fail(function(jqXHR, textStatus, errorThrown) {
@@ -91,7 +88,4 @@ function processImage() {
           : jQuery.parseJSON(jqXHR.responseText).message;
       alert(errorString);
     });
-
-  // clear input
-  document.getElementById("url").value = "";
 }
