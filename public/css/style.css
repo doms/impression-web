@@ -1,169 +1,216 @@
+@import url("https://fonts.googleapis.com/css?family=Lobster");
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
 body {
-  background-color: #112233;
-  font-family: raleway;
-}
-
-.cover {
-  display: table;
-  margin: 100px auto;
-}
-
-input[type="radio"] {
-  position: absolute;
-  left: -9999px;
-}
-
-.nav-btn:focus,
-.nav-btn:active {
-  outline: none;
-}
-.nav-btn:after {
-  content: "";
-  height: 0;
-  width: 0;
-  left: 50%;
-  bottom: 0%;
-  -webkit-transform: translateX(-50%);
-  transform: translateX(-50%);
-  margin-bottom: -15px;
-  position: absolute;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-bottom: 10px solid #fff;
-  z-index: -1;
-  opacity: 0;
-}
-
-.active-caret:after {
-  opacity: 1;
-}
-
-.nav-btn.active {
-  position: relative;
-}
-.nav-btn.active:after {
-  -webkit-animation: grow 600ms cubic-bezier(0.14, 1.21, 0.55, 1.48) 400ms;
-  animation: grow 600ms cubic-bezier(0.14, 1.21, 0.55, 1.48) 400ms;
-}
-
-@-webkit-keyframes grow {
-  from {
-    opacity: 0;
-    -webkit-transform: translate(-50%, 200%);
-    transform: translate(-50%, 200%);
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes grow {
-  from {
-    opacity: 0;
-    -webkit-transform: translate(-50%, 200%);
-    transform: translate(-50%, 200%);
-  }
-  to {
-    opacity: 1;
-  }
-}
-.auth-btn > * {
-  display: inline-block;
-}
-.auth-btn > * > * {
-  display: inline-block;
-}
-.auth-btn a,
-.auth-btn input[type="radio"] ~ label {
-  text-decoration: none;
   color: white;
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: 0.8rem;
+  font-size: 30px;
+}
+.main-title {
+  margin: 20% auto 0%;
+  text-align: center;
+  font-size: 75px;
+  font-family: "Lobster";
+  color: white;
+  text-shadow: 0.09em 0.09em #000;
+}
+
+#LISU {
+  font-family: "Lobster";
+  text-align: center;
+  margin: 2% auto;
+}
+
+#demo {
+  font-family: "Lobster";
+  margin: 0 43%;
+}
+
+span {
+  display: inline-block;
+}
+.Buttons {
+  background-color: #990000;
+  margin: 50px;
+  padding: 10px 55px;
+  border: 3px groove black;
+  border-radius: 1px;
+}
+
+.Buttons:hover {
+  background-color: rgb(216, 30, 30);
+  color: white;
+  padding: 15px 60px;
+}
+
+/* ParticleJS */
+#particles-js {
+  background-color: #181a2c;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: -10;
+  top: 0;
+  left: 0;
+}
+
+/* Modal */
+body {
+  background: white;
+  text-align: right;
+  margin-right: 20px;
+  font-family: helvetica;
+}
+
+a {
+  text-decoration: none;
+  color: #990000;
+}
+
+#modal-box {
+  width: 500px;
+  margin: 0 auto;
+  background: white;
+}
+
+.close {
+  display: none;
+  float: right;
+  font-size: 46px;
+  margin-right: 18px;
+  color: grey;
   cursor: pointer;
 }
 
-.auth-body > * {
-  display: none;
+#panel {
+  text-align: center;
 }
-.auth-body > *.active {
-  display: block;
+
+#tabbox {
+  text-align: center;
+  margin: 0 auto;
+  padding: 4% 0% 0%;
+  width: 94%;
 }
-.auth-body input {
-  width: 100%;
-  padding: 10px;
-  box-sizing: border-box;
-  border: 1px solid transparent;
-  background-color: transparent;
-  margin: 5px auto;
-  border-radius: 5px;
+
+.tab {
+  background: #505050;
+  display: inline-block;
+  line-height: 40px;
+  text-align: center;
+  width: 46%;
+  font-weight: bold;
+}
+
+.tab:hover {
+  background: #3a3a3a;
+}
+
+#tabbox a {
+  color: white;
+  margin: -3px;
+  padding: 1%;
+  text-decoration: none;
+}
+
+.signup {
+  margin-left: 1px;
+}
+
+.login-select {
+  background-color: #990000;
+}
+
+.login-select:hover {
+  background-color: #990000;
+}
+
+#login {
+  margin-left: -2px;
+}
+
+#signupbox {
+  padding: 10px 10px 36px;
+  height: 100%;
   background-color: #fff;
-  font-size: 0.9rem;
-  color: #333;
-  opacity: 0;
+  margin-top: 1%;
 }
 
-.active-input {
-  opacity: 1 !important;
+#loginbox {
+  padding: 10px 10px 36px;
+  height: 100%;
+  display: none;
+  background-color: #fff;
+  margin-top: 1%;
 }
 
-.left-btns {
-  margin-right: 40px;
-}
-.left-btns a,
-.left-btns label {
-  margin-right: 28px;
-}
-
-.auth-body {
-  margin-top: 7px;
-  max-width: 350px;
-  width: 100%;
+#forgetbox {
+  padding: 10px 10px 36px;
+  height: 100%;
+  display: none;
+  background-color: #fff;
+  margin-top: 1%;
 }
 
-.active input {
-  -webkit-animation: show 500ms cubic-bezier(0.14, 1.21, 0.55, 1.48);
-  animation: show 500ms cubic-bezier(0.14, 1.21, 0.55, 1.48);
-}
-.active input:nth-child(1) {
-  -webkit-animation-delay: 0ms;
-  animation-delay: 0ms;
-}
-.active input:nth-child(2) {
-  -webkit-animation-delay: 200ms;
-  animation-delay: 200ms;
-}
-.active input:nth-child(3) {
-  -webkit-animation-delay: 300ms;
-  animation-delay: 300ms;
-}
-.active input:nth-child(4) {
-  -webkit-animation-delay: 400ms;
-  animation-delay: 400ms;
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  padding-top: 60px;
 }
 
-@-webkit-keyframes show {
-  from {
-    -webkit-transform: translateY(-100%);
-    transform: translateY(-100%);
-    opacity: 0;
-  }
-  to {
-    -webkit-transform: translateY(0%);
-    transform: translateY(0%);
-    opacity: 1;
-  }
+#signupbox input {
+  width: 90%;
+  margin: 2% auto;
+  padding: 2%;
+  border: none;
+  background: #e6e6e6;
 }
 
-@keyframes show {
-  from {
-    -webkit-transform: translateY(-100%);
-    transform: translateY(-100%);
-    opacity: 0;
-  }
-  to {
-    -webkit-transform: translateY(0%);
-    transform: translateY(0%);
-    opacity: 1;
-  }
+#loginbox input {
+  width: 90%;
+  margin: 2% auto;
+  padding: 2%;
+  border: none;
+  background: #e6e6e6;
+}
+
+#forgetbox input {
+  width: 90%;
+  margin: 2% auto;
+  padding: 2%;
+  border: none;
+  background: #e6e6e6;
+}
+
+#signupbox input::-webkit-input-placeholder,
+#loginbox input::-webkit-input-placeholder,
+#forgetbox input::-webkit-input-placeholder {
+  color: grey;
+}
+
+#loginbox a {
+  display: block;
+  margin: 2% 2% 4%;
+}
+
+#signupbox button,
+#loginbox button,
+#forgetbox button {
+  background: #990000;
+  border: none;
+  padding: 12px 30px;
+  color: white;
+  cursor: pointer;
+  width: 94%;
 }

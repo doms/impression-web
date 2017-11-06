@@ -9,50 +9,68 @@
     <meta name="author" content="Dominic Young">
 
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Raleway" />
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-    <div class="cover">
-        <div class="auth-btn">
-            <div class="left-btns">
-                <div class="relative">
-                    <a class="nav-btn" href="#" id="signIn" data-value="signin-block">Sign In</a>
+    <h1 class="main-title">Impression</h1>
+    <div id="LISU">
+        <span class="Buttons" name="Login/Sign Up" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login/Sign Up</span>
+
+        <!-- hacky way to use span as form for demo -->
+        <form class="form-class" action="/demo" method="post">
+            <span class="Buttons" id='demo' name="Demo">Demo</span>
+        </form>
+    </div>
+
+    <!-- Login / Sign Up Modal -->
+    <div id="id01" class="modal">
+        <div id="modal-box">
+            <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+            <div id="tabbox">
+                <a href="#" id="signup" class="tab signup">Signup</a>
+                <a href="#" id="login" class="tab ">Login</a>
+            </div>
+
+            <!-- Sign Up -->
+            <div id="panel">
+                <div id="signupbox">
+                    <form action="/signup" method="post">
+                        <input type="text" placeholder="Email" name="email" required>
+                        <input type="password" placeholder="Password" name="password" required>
+                        <button type="submit">Register</button>
+                    </form>
                 </div>
-                <div class="relative">
-                    <a class="nav-btn" href="#" id="signUp" data-value="signup-block">Sign Up</a>
+
+                <!-- Login -->
+                <div id="loginbox">
+                    <form action="/login" method="post">
+                        <input type="text" placeholder="Email" name="email" required>
+                        <input type="password" placeholder="Password" name="password" required>
+                        <!-- <a href="#" class="forgot-button">Forgot Password?</a> -->
+                        <button type="submit">Login</button>
+                    </form>
                 </div>
-            </div>
-            <button class="right-btns">
-                <a class="nav-btn" href="#" id="fp" data-value="demo-block">Demo</a>
-            </button>
-        </div>
-        <div class="auth-body">
-            <div class="login-block input-block">
-                <form action="/login" method="post">
-                    <input class="input-field" type="email" name="email" placeholder="Email *" />
-                    <input class="input-field" type="password" name="password" placeholder="Password" />
-                </form>
-            </div>
-            <div class="signup-block input-block">
-                <form action="/signup" method="post">
-                    <input class="input-field" type="email" name="email" placeholder="Email" />
-                    <input class="input-field" type="password" name="email" placeholder="Password" />
-                </form>
-            </div>
-            <div class="demo-block input-block">
-                <form action="/demo" method="post">
-                    <button class="input-field" type="submit" placeholder="Email" />
-                </form>
+
+                <!-- Hmmmm should I implement forgot password??? -->
+
+                <!-- <div id="forgetbox">
+                        <h1>Forgot Password</h1>
+                        <input type="text" placeholder="Enter Email" name="email" required>
+                        <button type="submit">Submit</button>
+                    </div> -->
             </div>
         </div>
     </div>
+
+    </div>
+
     <div id="particles-js"></div>
 </body>
 
 <!-- public/js -->
 <script src="js/index.js"></script>
 <script src="js/particles.min.js"></script>
+<script src="js/helpers.js"></script>
 
 </html>

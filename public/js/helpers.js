@@ -1,79 +1,133 @@
-function initApp() {
-  // Listening for auth state changes.
-  firebase.auth().onAuthStateChanged(function(user) {
-    if (user) {
-      // User is signed in.
-      let name = user.name;
-      let email = user.email;
-      let isAnonymous = user.isAnonymous;
-      let uid = user.uid;
-      let providerData = user.providerData;
-    } else {
-      // User is signed out.
-      document.getElementById("quickstart-sign-in-status").textContent =
-        "Signed out";
-      document.getElementById("quickstart-sign-in").textContent = "Sign in";
-      document.getElementById("quickstart-account-details").textContent =
-        "null";
+// /* particlesJS.load(@dom-id, @path-json, @callback (optional)); */
+particlesJS.load("particles-js", "../particlesjs-config.json", function() {
+  console.info("particles.js config loaded");
+});
+
+function handle(e) {
+  if (e.keyCode === 13) {
+    processImage();
+  }
+  return false;
+}
+
+function previewFile() {
+  var preview = document.getElementById("sourceImage");
+  var fileType;
+
+  var file = document.querySelector("input[type=file]").files[0];
+  var reader = new FileReader();
+
+  reader.addEventListener(
+    "loadend",
+    function() {
+      preview.src = reader.result;
+
+      // send to API to get analyzed
+      processImage();
+    },
+    false
+  );
+
+  if (file) {
+    fileType = file.type;
+    reader.readAsDataURL(file);
+  }
+}
+
+function makeBlob(dataURL) {
+  var BASE64_MARKER = ";base64,";
+  if (dataURL.indexOf(BASE64_MARKER) == -1) {
+    var parts = dataURL.split(",");
+    var contentType = parts[0].split(":")[1];
+    var raw = decodeURIComponent(parts[1]);
+    return new Blob([raw], { type: contentType });
+  }
+
+  var parts = dataURL.split(BASE64_MARKER);
+  var contentType = parts[0].split(":")[1];
+  var raw = window.atob(parts[1]);
+  var rawLength = raw.length;
+
+  var uInt8Array = new Uint8Array(rawLength);
+
+  for (var i = 0; i < rawLength; ++i) {
+    uInt8Array[i] = raw.charCodeAt(i);
+  }
+
+  return new Blob([uInt8Array], { type: contentType });
+}
+
+// handle file upload
+function handleFileUpload() {
+  $(".input-file").before(function() {
+    if (
+      !$(this)
+        .prev()
+        .hasClass("input-ghost")
+    ) {
+      var element = $(
+        "<input type='file' accept='image/*' onchange='previewFile();' id='test' class='input-ghost' style='visibility:hidden; height:0'>"
+      );
+      element.attr("name", $(this).attr("name"));
+
+      // link custom browse button to hidden one
+      $(this)
+        .find("button.btn-primary")
+        .click(function() {
+          element.click();
+        });
+
+      return element;
     }
-    document.getElementById("quickstart-sign-in").disabled = false;
+  });
+}
+
+$(function() {
+  handleFileUpload();
+});
+
+// handle modal
+$(document).ready(function() {
+  $(".signup").addClass("login-select");
+  $(".tab").click(function() {
+    var X = $(this).attr("id");
+
+    if (X == "signup") {
+      $("#login").removeClass("login-select");
+      $("#signup").addClass("login-select");
+      $("#loginbox").hide(300);
+      $("#signupbox").show(300);
+      $("#forgetbox").hide(300);
+    } else {
+      $("#signup").removeClass("login-select");
+      $("#login").addClass("login-select");
+      $("#signupbox").hide(300);
+      $("#loginbox").show(300);
+      $("#forgetbox").hide(300);
+    }
   });
 
-  // sign user in
-  document
-    .getElementById("quickstart-sign-in")
-    .addEventListener("click", toggleSignIn, false);
+  $(".forgot-button").click(function() {
+    $("#signupbox").hide(300);
+    $("#loginbox").hide(300);
+    $("#forgetbox").show(300);
+  });
+});
 
-  // sign user up
-  document
-    .getElementById("quickstart-sign-up")
-    .addEventListener("click", handleSignUp, false);
-}
+// Get the modal
+var modal = document.getElementById("id01");
 
-// add user to db
-function writeUserData(userId, name, email) {
-  let database = firebase.database();
-  firebase
-    .database()
-    .ref("users/" + userId)
-    .set({
-      username: name,
-      email: email
-    });
-}
-
-// add photo info to db under respective user
-function writePhotoData(userId, photoUrl, accuracyScore, description, tags) {
-  let database = firebase.database();
-  firebase
-    .database()
-    .ref("users/" + userId + "/photos/" + tags[0])
-    .set({
-      photo: photoUrl,
-      confidence: accuracyScore,
-      text: description,
-      tags: tags
-    });
-}
-
-function showCurrentUser() {
-  let database = firebase.database();
-  let userId = firebase.auth().currentUser.uid;
-  return firebase
-    .database()
-    .ref("/users/" + userId)
-    .once("value")
-    .then(function(snapshot) {
-      let username = (snapshot.val() && snapshot.val().username) || "Anonymous";
-
-      // TODO: set navbar to username
-    });
-}
-
-// export functions to use in other files
-module.exports = {
-  initApp: initApp,
-  writeUserData: writeUserData,
-  writePhotoData: writePhotoData,
-  showCurrentUser: showCurrentUser
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
 };
+
+// launch demo
+var demo = $("#demo");
+demo.on("click", function() {
+  $(this)
+    .closest("form")
+    .submit();
+});
