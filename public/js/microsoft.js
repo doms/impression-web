@@ -70,11 +70,24 @@ function processImage() {
       $(".modal-body").append(
         "<h1 id='modal-results'>" +
           "I am " +
-          (results.description.captions[0].confidence * 100).toFixed(1) +
+          (results.description.captions[0].confidence * 100).toFixed(2) +
           "% sure that this is " +
           results.description.captions[0].text +
-          "</h1>"
+          "</h1>" +
+          "<form action=/save method='post' style='display: none;'>" +
+          "<input type='text' name='url' id='photo-url'>" +
+          "<input type='text' name='confidence' id='confidence'>" +
+          "<input type='text' name='description' id='description'>" +
+          "<input type='text' name='tags' id='tags'>" +
+          "</form>"
       );
+
+      // programmatically fill input form for /save
+      $("#photo-url").val = sourceImageUrl.replace(/\\"/g, '"');
+      $("#confidence").val = (results.description.captions[0].confidence * 100
+      ).toFixed(2);
+      $("#description").val = results.description.captions[0].text;
+      $("#tags").val = results.description.tags;
 
       // $(".modal-results").remove("h1");
       $("#myModal").modal("show");

@@ -14,7 +14,7 @@ router.get("/", function(req, res, next) {
 // save photo info under current user
 router.post("/save", function(req, res, next) {
   // get photo info
-  let photoUrl = req.body.photoUrl;
+  let photoUrl = req.body.url;
   let confidence = req.body.confidence;
   let text = req.body.description;
   let tags = req.body.tags;
@@ -27,7 +27,7 @@ router.post("/save", function(req, res, next) {
   firebase
     .database()
     .ref("users/" + userId + "/photos/" + tags[0])
-    .set({
+    .push({
       photo: photoUrl,
       confidence: accuracyScore,
       text: description,
@@ -71,7 +71,7 @@ router.post("/signup", function(req, res, next) {
     .createUserWithEmailAndPassword(email, password)
     .then(function(userRecord) {
       res.location("/user/" + userRecord.uid);
-      res.status(201).end(res.redirect("/"));
+      res.status(201).end(res.redirect("/home"));
     })
     .catch(function(error) {
       res.write({
