@@ -1,6 +1,6 @@
 // /* particlesJS.load(@dom-id, @path-json, @callback (optional)); */
-particlesJS.load("particles-js", "assets/particlesjs-config.json", function() {
-  console.info("[INFO] particles.js config loaded");
+particlesJS.load("particles-js", "../particlesjs-config.json", function() {
+  console.info("particles.js config loaded");
 });
 
 function handle(e) {
