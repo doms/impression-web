@@ -131,3 +131,9 @@ demo.on("click", function() {
     .closest("form")
     .submit();
 });
+
+// save results to user
+var submitForm = $("#save-results");
+submitForm.on("click", function() {
+  $("#submit-form").submit();
+});

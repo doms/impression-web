@@ -59,8 +59,6 @@ function processImage() {
     data: inputType
   })
     .done(function(data) {
-      // $("div.modal-backdrop").remove();
-
       // Parse info we want from results
       var results = JSON.parse(JSON.stringify(data, null, 2));
 
@@ -74,22 +72,22 @@ function processImage() {
           "% sure that this is " +
           results.description.captions[0].text +
           "</h1>" +
-          "<form action=/save method='post' style='display: none;'>" +
-          "<input type='text' name='url' id='photo-url'>" +
-          "<input type='text' name='confidence' id='confidence'>" +
-          "<input type='text' name='description' id='description'>" +
-          "<input type='text' name='tags' id='tags'>" +
+          "<form action=/save method='post' id='submit-form' style='display: none;'>" +
+          "<input type='text' name='url'>" +
+          "<input type='text' name='confidence'>" +
+          "<input type='text' name='text'>" +
+          "<input type='text' name='tags'>" +
           "</form>"
       );
 
       // programmatically fill input form for /save
-      $("#photo-url").val = sourceImageUrl.replace(/\\"/g, '"');
-      $("#confidence").val = (results.description.captions[0].confidence * 100
+      $("input[name='url']").val = sourceImageUrl;
+      $("input[name='confidence']").val = (results.description.captions[0]
+        .confidence * 100
       ).toFixed(2);
-      $("#description").val = results.description.captions[0].text;
-      $("#tags").val = results.description.tags;
+      $("input[name='description']").val = results.description.captions[0].text;
+      $("input[name='tags']").val = results.description.tags;
 
-      // $(".modal-results").remove("h1");
       $("#myModal").modal("show");
     })
     .fail(function(jqXHR, textStatus, errorThrown) {

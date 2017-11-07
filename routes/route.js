@@ -14,9 +14,9 @@ router.get("/", function(req, res, next) {
 // save photo info under current user
 router.post("/save", function(req, res, next) {
   // get photo info
-  let photoUrl = req.body.url;
+  let url = req.body.url;
   let confidence = req.body.confidence;
-  let text = req.body.description;
+  let text = req.body.text;
   let tags = req.body.tags;
 
   // initialize db instance to save info
@@ -28,11 +28,13 @@ router.post("/save", function(req, res, next) {
     .database()
     .ref("users/" + userId + "/photos/" + tags[0])
     .push({
-      photo: photoUrl,
-      confidence: accuracyScore,
-      text: description,
+      url: url,
+      confidence: confidence,
+      text: text,
       tags: tags
     });
+
+  res.redirect("/home");
 });
 
 // go to main page logged in as user
