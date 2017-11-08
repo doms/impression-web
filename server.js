@@ -4,7 +4,6 @@ const favicon = require("serve-favicon");
 const path = require("path");
 
 const routes = require("./routes/route");
-// const helpers = require("./public/js/helpers");
 
 // Firebase
 const firebase = require("firebase");
@@ -39,14 +38,14 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", routes);
 
 // handle any 404 errors
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
   var err = new Error("Not Found");
   err.status = 404;
   next(err);
 });
 
 // show errors in development
-app.use(function(err, req, res, next) {
+app.use((err, req, res) => {
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};
 
@@ -57,6 +56,6 @@ app.use(function(err, req, res, next) {
 
 // listen for requests
 const port = process.env.port || 4000;
-app.listen(port, function() {
+app.listen(port, () => {
   console.log("Listening for requests on PORT:", port);
 });

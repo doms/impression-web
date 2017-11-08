@@ -6,14 +6,12 @@ const firebase = require("firebase");
 const MW = require("../middleware/auth");
 
 // authenticate user
-router.get("/", function(req, res, next) {
-  //   res.render("index");
-  res.render("auth"); // require sign in
+router.get("/", (req, res) => {
+  res.render("auth");
 });
 
 // save photo info under current user
-router.post("/save", function(req, res, next) {
-  // get photo info
+router.post("/save", (req, res) => {
   let url = req.body.url;
   let confidence = req.body.confidence;
   let text = req.body.text;
@@ -26,7 +24,7 @@ router.post("/save", function(req, res, next) {
   // save info
   firebase
     .database()
-    .ref("users/" + userId + "/photos/" + tags[0])
+    .ref("user/" + userId + "/photos/" + tags[0])
     .push({
       url: url,
       confidence: confidence,
@@ -38,22 +36,21 @@ router.post("/save", function(req, res, next) {
 });
 
 // go to main page logged in as user
-router.get("/home", MW.isAuthenticated, function(req, res, next) {
+router.get("/home", MW.isAuthenticated, (req, res) => {
   res.render("index", {
     user: req.user
   });
 });
 
 // allow anonymous sign in for demo of application
-router.post("/demo", function(req, res, next) {
+router.get("/demo", (req, res) => {
   firebase
     .auth()
     .signInAnonymously()
-    .then(function(authData) {
-      console.log(authData);
+    .then(authData => {
       res.redirect("/home");
     })
-    .catch(function(error) {
+    .catch(error => {
       console.log("Error:");
       console.log("name:", error.name);
       console.log("message:", error.message);
@@ -61,21 +58,18 @@ router.post("/demo", function(req, res, next) {
 });
 
 // create new user
-router.post("/signup", function(req, res, next) {
+router.post("/signup", (req, res) => {
   let email = req.body.email;
   let password = req.body.password;
-
-  // DEBUG: checking for email and password
-  console.log(`Email: ${email} Password: ${password}`);
 
   firebase
     .auth()
     .createUserWithEmailAndPassword(email, password)
-    .then(function(userRecord) {
+    .then(userRecord => {
       res.location("/user/" + userRecord.uid);
       res.status(201).end(res.redirect("/home"));
     })
-    .catch(function(error) {
+    .catch(error => {
       res.write({
         code: error.code
       });
@@ -84,7 +78,7 @@ router.post("/signup", function(req, res, next) {
 });
 
 // login as existing user
-router.post("/login", function(req, res, next) {
+router.post("/login", (req, res) => {
   let email = req.body.email;
   let password = req.body.password;
 
@@ -92,7 +86,6 @@ router.post("/login", function(req, res, next) {
     .auth()
     .signInWithEmailAndPassword(email, password)
     .then(function(authData) {
-      console.log(authData);
       res.redirect("/home");
     })
     .catch(function(error) {
@@ -106,17 +99,15 @@ router.post("/login", function(req, res, next) {
 });
 
 // logout as current user
-router.get("/logout", MW.isAuthenticated, function(req, res, next) {
+router.get("/logout", MW.isAuthenticated, (req, res) => {
   firebase
     .auth()
     .signOut()
-    .then(function() {
-      console.log("Logging out of session...");
-
+    .then(() => {
       // logged out, redirect back to main page
       res.redirect("/");
     })
-    .catch(function(error) {
+    .catch(error => {
       console.log(error.message);
     });
 });
