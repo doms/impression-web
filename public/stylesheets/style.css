@@ -19,6 +19,18 @@ body {
   text-shadow: 0.09em 0.09em #000;
 }
 
+.sign-out {
+  color: white;
+  position: absolute;
+  top: 2em;
+  right: 5em;
+}
+
+.sign-out button {
+  color: black;
+  margin-left: 2em;
+}
+
 #analyze {
 }
 
