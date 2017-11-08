@@ -60,6 +60,16 @@
             </div>
         </div>
     </div>
+
+    <!-- display email top right -->
+    <div class="sign-out">
+        <p>
+            <%= user.email %>
+        </p>
+        <form action="/logout" method="get">
+            <button type="submit">Sign Out</button>
+        </form>
+    </div>
     <div id="particles-js"></div>
 </body>
 
