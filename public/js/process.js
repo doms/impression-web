@@ -6,7 +6,6 @@ function compareResults(microsoft, google) {
   var microsoftResults = JSON.parse(JSON.stringify(microsoft, null, 2));
   var googleResults = JSON.parse(JSON.stringify(google, null, 2));
 
-  console.log("TSETSEFSDFSDFSFSDF");
   console.log(
     "microsoft:",
     microsoftResults.description.captions[0].confidence * 100
@@ -19,8 +18,8 @@ function compareResults(microsoft, google) {
   // return results object of higher accuracy score
   return microsoftResults.description.captions[0].confidence * 100 >
     googleResults.responses[0].labelAnnotations[0].score * 100
-    ? microsoft
-    : google;
+    ? { name: "microsoft", data: microsoft }
+    : { name: "google", data: google };
 }
 
 function processImage() {
@@ -57,7 +56,7 @@ function processImage() {
   console.log("inputType:", inputType);
 
   // Microsoft API call.
-  console.log("FIRST AJAX CALL STARTING");
+
   $.ajax({
     url: uriBase + "?" + $.param(params),
 
@@ -73,66 +72,82 @@ function processImage() {
     success: function(data) {
       // Parse info to use for comparison
       var microsoftResults = JSON.parse(JSON.stringify(data, null, 2));
+      console.log("microsoft response body:", microsoftResults);
 
       // prepare request object
-      var request = {};
-      request["requests"] = [];
+      var requests;
 
       // URL's and local files requests are structured differently
       // https://cloud.google.com/vision/docs/request#providing_the_image
-      if (sourceImageUrl !== "") {
-        request["requests"].push({
-          image: {
-            source: {
-              imageUri: sourceImageUrl
-            }
-          },
-          features: [
-            {
-              type: "LABEL_DETECTION"
-            }
-          ]
-        });
-      } else {
-        // remove
-        var formattedInput = preview.replace(/(.*,)/g, "");
+      if (sourceImageUrl === "") {
+        // remove base64 tag
+        var formattedInput = preview.replace(/(.*,)/, "");
         console.log("Formatted:", formattedInput);
-        request["requests"].push({
-          image: {
-            content: formattedInput
-          },
-          features: [
+
+        requests = {
+          requests: [
             {
-              type: "LABEL_DETECTION",
-              maxResults: 10
+              image: {
+                content: formattedInput
+              },
+              features: [
+                {
+                  type: "LABEL_DETECTION",
+                  maxResults: 1
+                }
+              ]
             }
           ]
-        });
+        };
+      } else {
+        requests = {
+          requests: [
+            {
+              image: {
+                source: {
+                  imageUri: sourceImageUrl
+                }
+              },
+              features: [
+                {
+                  type: "LABEL_DETECTION",
+                  maxResults: 1
+                }
+              ]
+            }
+          ]
+        };
       }
-      console.log("FIRST AJAX CALL ENDING");
-      // Google API call
 
-      console.log("SECOND AJAX CALL STARTING");
       $.ajax({
         url: `https://vision.googleapis.com/v1/images:annotate?key=${googleApiKey}`,
+
+        // Might have to set size....
+        beforeSend: function(xhrObj) {
+          // xhrObj.setRequestHeader("Content-Length", formattedInput.length);
+          xhrObj.setRequestHeader("Content-Type", "application/json");
+        },
+
         type: "POST",
         processData: false,
-        data: request,
+        data: JSON.stringify(requests),
         success: function(data) {
           var googleResults = JSON.parse(JSON.stringify(data, null, 2));
+          console.log("google response body: ", googleResults);
 
           // get accurate results
           var accurateResults = compareResults(microsoftResults, googleResults);
+          console.log("accurate results:", accurateResults);
 
           // microsoft
-          try {
+          if (accurateResults.name === "microsoft") {
             $(".modal-body").append(
               "<h1 id='modal-results'>" +
                 "I am " +
-                (accurateResults.description.captions[0].confidence * 100
+                (accurateResults.data.description.captions[0].confidence * 100
                 ).toFixed(2) +
                 "% sure that this is " +
-                accurateResults.description.captions[0].text +
+                accurateResults.data.description.captions[0].text +
                 "</h1>" +
                 "<form action=/save method='post' id='submit-form' style='display: none;'>" +
                 "<input type='text' name='url'>" +
@@ -144,21 +159,23 @@ function processImage() {
 
             // programmatically fill input form for /save
             $("input[name='url']").val = sourceImageUrl;
-            $("input[name='confidence']").val = (results.description.captions[0]
-              .confidence * 100
+            $("input[name='confidence']").val = (accurateResults.data
+              .description.captions[0].confidence * 100
             ).toFixed(2);
             $("input[name='description']").val =
-              results.description.captions[0].text;
-            $("input[name='tags']").val = results.description.tags;
-          } catch (error) {
+              accurateResults.data.description.captions[0].text;
+            $("input[name='tags']").val = accurateResults.data.description.tags;
+          } else {
             // Google had better results...
             $(".modal-body").append(
               "<h1 id='modal-results'>" +
                 "I am " +
-                (accurateResults.description.captions[0].confidence * 100
+                (accurateResults.data.responses[0].labelAnnotations[0].score *
+                  100
                 ).toFixed(2) +
-                "% sure that this is " +
-                accurateResults.description.captions[0].text +
+                "% sure that this is a" +
+                accurateResults.data.responses[0].labelAnnotations[0]
+                  .description +
                 "</h1>" +
                 "<form action=/save method='post' id='submit-form' style='display: none;'>" +
                 "<input type='text' name='url'>" +
@@ -170,18 +187,16 @@ function processImage() {
 
             // programmatically fill input form for /save
             $("input[name='url']").val = sourceImageUrl;
-            $("input[name='confidence']").val = (results.responses
-              .labelAnnotations[0].confidence * 100
+            $("input[name='confidence']").val = (accurateResults.data
+              .responses[0].labelAnnotations[0].score * 100
             ).toFixed(2);
             $("input[name='description']").val =
-              results.responses.labelAnnotations[0].description;
+              accurateResults.data.responses[0].labelAnnotations[0].description;
             $("input[name='tags']").val =
-              results.responses.labelAnnotations[0].description;
+              accurateResults.data.responses[0].labelAnnotations[0].description;
           }
 
           $("#myModal").modal("show");
-
-          console.log("SECOND AJAX CALL ENDING");
         }
       });
     }
