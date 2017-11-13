@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>Impression</title>
+    <meta name="description" content="learning from images">
+    <meta name="author" content="Dominic Young">
+
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <h1 class="main-title">Impression</h1>
+    <div id="LISU">
+        <span class="Buttons" name="Login/Sign Up" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login/Sign Up</span>
+
+        <!-- hacky way to use span as form for demo -->
+        <form class="form-class" action="/demo" method="get">
+            <span class="Buttons" id='demo' name="Demo">Demo</span>
+        </form>
+    </div>
+
+    <!-- Login / Sign Up Modal -->
+    <div id="id01" class="modal">
+        <div id="modal-box">
+            <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+            <div id="tabbox">
+                <a href="#" id="signup" class="tab signup">Signup</a>
+                <a href="#" id="login" class="tab ">Login</a>
+            </div>
+
+            <!-- Sign Up -->
+            <div id="panel">
+                <div id="signupbox">
+                    <h3 style="color:black;">Sign Up</h3>
+                    <form action="/signup" method="post">
+                        <input type="text" placeholder="Email" name="email" required>
+                        <input type="password" placeholder="Password" name="password" required>
+                        <button type="submit">Register</button>
+                    </form>
+                </div>
+
+                <!-- Login -->
+                <div id="loginbox">
+                    <h3 style="color:black;">Login</h3>
+                    <form action="/login" method="post">
+                        <input type="text" placeholder="Email" name="email" required>
+                        <input type="password" placeholder="Password" name="password" required>
+                        <!-- <a href="#" class="forgot-button">Forgot Password?</a> -->
+                        <button type="submit">Login</button>
+                    </form>
+                </div>
+
+                <!-- Hmmmm should I implement forgot password??? -->
+
+                <!-- <div id="forgetbox">
+                        <h1>Forgot Password</h1>
+                        <input type="text" placeholder="Enter Email" name="email" required>
+                        <button type="submit">Submit</button>
+                    </div> -->
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+    <div id="particles-js"></div>
+</body>
+
+<!-- public/js -->
+<script src="js/particles.min.js"></script>
+<script src="js/helpers.js"></script>
+
+</html>

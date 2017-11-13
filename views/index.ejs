@@ -8,23 +8,22 @@
     <meta name="description" content="learning from images">
     <meta name="author" content="Dominic Young">
 
-    <link href="css/style.css" rel="stylesheet" type="text/css">
-    <link href="css/modal.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="stylesheets/style.css" type="text/css">
+    <link rel="stylesheet" href="stylesheets/modal.css" type="text/css">
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
     <script src="https://code.responsivevoice.org/responsivevoice.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css">
 </head>
 
 <body>
     <div id="container">
         <!-- main title -->
-        <h1 class="main-title animated fadeInUpBig">Impression</h1>
+        <h1 class="main-title">Impression</h1>
 
         <!-- file browser & search bar -->
-        <div class="form-group animated fadeInDownBig">
+        <div class="form-group">
             <div class="input-group" id="custom">
                 <input type="text" onkeyup="handle(event)" class="form-control" id="url" placeholder='Image URL...' />
                 <span class="input-group-btn">
@@ -54,21 +53,56 @@
                     <img id="sourceImage" width="400" />
                 </div>
                 <div class="modal-footer">
+                    <div class="btn-group" role="group" aria-label="..." style="float: left">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            Languages...
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" id="language" aria-labelledby="dropdownMenu2">
+                            <li>
+                                <a href="#" value="en">English</a>
+                            </li>
+                            <li>
+                                <a href="#" value="es">Spanish</a>
+                            </li>
+                            <li>
+                                <a href="#" value="de">German</a>
+                            </li>
+                            <li>
+                                <a href="#" value="kr">Korean</a>
+                            </li>
+                        </ul>
+                        <button type="button" class="btn btn-default" id="play-button">
+                            <i class="fa fa-play" aria-hidden="true"></i>
+                        </button>
+                        <button type="button" class="btn btn-default" id="stop-button">
+                            <i class="fa fa-stop" aria-hidden="true"></i>
+                        </button>
+                    </div>
                     <button type="button" class="btn btn-default" onclick="javascript:window.location.reload()" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="javascript:window.location.reload()">Save changes</button>
+                    <button type="submit" id="save-results" class="btn btn-primary">Save Results</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- particlesJS -->
+    <!-- display email top right -->
+    <div class="sign-out">
+        <p>
+            <%= user.email %>
+        </p>
+        <form action="/logout" method="get">
+            <button type="submit">Sign Out</button>
+        </form>
+    </div>
     <div id="particles-js"></div>
 </body>
 
 <!-- scripts -->
 <script src="js/particles.min.js"></script>
-<script src="js/app.js"></script>
-<script src="js/microsoft.js"></script>
+<script src="js/helpers.js"></script>
+<script src="js/process.js"></script>
 <script src="js/tts.js"></script>
 
 </html>
