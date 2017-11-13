@@ -1,32 +1,26 @@
-// get text to read from input box
-// var textToSpeak = document.getElementById("results").value;
-
 function handleVoice() {
+  // get text to read from input box
+  var textToSpeak = document.getElementById("api-description").innerText;
+  console.log(textToSpeak);
+
   // read it out loud
   responsiveVoice.speak(textToSpeak);
-
-  // add event listeners for play/pause/cancel
-  $("#pauseButton").on("click", function() {
-    if (!responsiveVoice.isPlaying()) {
-      return;
-    } else {
-      responsiveVoice.pause();
-    }
-  });
-
-  $("#playButton").on("click", function() {
-    if (responsiveVoice.isPlaying()) {
-      return;
-    } else {
-      responsiveVoice.resume();
-    }
-  });
-
-  $("#stopButton").on("click", function() {
-    if (!responsiveVoice.isPlaying()) {
-      return;
-    } else {
-      responsiveVoice.cancel();
-    }
-  });
 }
+
+$("#play-button").on("click", function() {
+  if (responsiveVoice.isPlaying()) {
+    return;
+  } else {
+    handleVoice();
+  }
+});
+
+$("#stop-button").on("click", function() {
+  if (!responsiveVoice.isPlaying()) {
+    return;
+  } else {
+    responsiveVoice.cancel();
+  }
+});
+
+// TODO: implement different languages (watch for change on dropdown menu)
