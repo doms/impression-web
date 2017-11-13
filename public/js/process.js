@@ -142,58 +142,70 @@ function processImage() {
           // microsoft
           if (accurateResults.name === "microsoft") {
             $(".modal-body").append(
-              "<h1 id='modal-results'>" +
-                "I am " +
+              "<h1 id='results'>" +
+                "I am <strong>" +
                 (accurateResults.data.description.captions[0].confidence * 100
                 ).toFixed(2) +
-                "% sure that this is " +
+                "%</strong> sure that this is " +
+                accurateResults.data.description.captions[0].text +
+                "</h1>" +
+                "<h1 id='api-description' style='display: none;'>" +
                 accurateResults.data.description.captions[0].text +
                 "</h1>" +
                 "<form action=/save method='post' id='submit-form' style='display: none;'>" +
-                "<input type='text' name='url'>" +
-                "<input type='text' name='confidence'>" +
-                "<input type='text' name='text'>" +
-                "<input type='text' name='tags'>" +
+                "<input type='text' name='url'/>" +
+                "<input type='text' name='confidence'/>" +
+                "<input type='text' name='text'/>" +
+                "<input type='text' name='tags'/>" +
                 "</form>"
             );
 
             // programmatically fill input form for /save
-            $("input[name='url']").val = sourceImageUrl;
-            $("input[name='confidence']").val = (accurateResults.data
-              .description.captions[0].confidence * 100
-            ).toFixed(2);
-            $("input[name='description']").val =
-              accurateResults.data.description.captions[0].text;
-            $("input[name='tags']").val = accurateResults.data.description.tags;
+            $("input[name='url']").val(sourceImageUrl);
+            $("input[name='confidence']").val(
+              (accurateResults.data.description.captions[0].confidence * 100
+              ).toFixed(2)
+            );
+            $("input[name='text']").val(
+              accurateResults.data.description.captions[0].text
+            );
+            $("input[name='tags']").val(accurateResults.data.description.tags);
           } else {
             // Google had better results...
             $(".modal-body").append(
-              "<h1 id='modal-results'>" +
-                "I am " +
+              "<h1 id='results'>" +
+                "I am <strong>" +
                 (accurateResults.data.responses[0].labelAnnotations[0].score *
                   100
                 ).toFixed(2) +
-                "% sure that this is a" +
+                "%</strong> sure that this is a " +
+                accurateResults.data.responses[0].labelAnnotations[0]
+                  .description +
+                "</h1>" +
+                "<h1 id='api-description' style='display: none;'>" +
                 accurateResults.data.responses[0].labelAnnotations[0]
                   .description +
                 "</h1>" +
                 "<form action=/save method='post' id='submit-form' style='display: none;'>" +
-                "<input type='text' name='url'>" +
-                "<input type='text' name='confidence'>" +
-                "<input type='text' name='text'>" +
-                "<input type='text' name='tags'>" +
+                "<input type='text' name='url'/>" +
+                "<input type='text' name='confidence'/>" +
+                "<input type='text' name='text'/>" +
+                "<input type='text' name='tags'/>" +
                 "</form>"
             );
 
             // programmatically fill input form for /save
-            $("input[name='url']").val = sourceImageUrl;
-            $("input[name='confidence']").val = (accurateResults.data
-              .responses[0].labelAnnotations[0].score * 100
-            ).toFixed(2);
-            $("input[name='description']").val =
-              accurateResults.data.responses[0].labelAnnotations[0].description;
-            $("input[name='tags']").val =
-              accurateResults.data.responses[0].labelAnnotations[0].description;
+            $("input[name='url']").val(sourceImageUrl);
+            $("input[name='confidence']").val(
+              (accurateResults.data.responses[0].labelAnnotations[0].score * 100
+              ).toFixed(2)
+            );
+            $("input[name='text']").val(
+              accurateResults.data.responses[0].labelAnnotations[0].description
+            );
+            $("input[name='tags']").val(
+              accurateResults.data.responses[0].labelAnnotations[0].description
+            );
           }
 
           $("#myModal").modal("show");
@@ -216,3 +228,6 @@ function processImage() {
 
 // Cycle new API keys since they expire quickly :(
 // https://azure.microsoft.com/en-gb/try/cognitive-services/
+
+// DB
+// https://console.firebase.google.com/u/0/project/impression-web/database/data
