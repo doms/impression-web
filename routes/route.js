@@ -24,7 +24,7 @@ router.post("/save", (req, res) => {
   // save info
   firebase
     .database()
-    .ref("user/" + userId + "/photos/" + tags[0])
+    .ref("users/" + userId + "/photos/" + tags[0])
     .push({
       url: url,
       confidence: confidence,
