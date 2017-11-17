@@ -48,6 +48,7 @@
 
 	btnLogout.addEventListener('click', e => {
 		firebase.auth().signOut();
+		window.location.href="index.html";
 	})
 
 	// Realtime listener to authinticate account and track login state
@@ -55,6 +56,8 @@
 		if(firebaseUser){
 			console.log('logged in');
 			document.getElementById('btnLogout').style.visibility = 'visible';
+			window.location.href="browse.html";
+			console.log('Switch to browse');
 		}
 		else{
 			console.log('not logged in');
