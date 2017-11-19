@@ -57,7 +57,6 @@
 			console.log('logged in');
 			document.getElementById('btnLogout').style.visibility = 'visible';
 			window.location.href="browse.html";
-			console.log('Switch to browse');
 		}
 		else{
 			console.log('not logged in');

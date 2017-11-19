@@ -12,40 +12,44 @@
 		
 		<!-- Scrip to use firebase data base -->
 		<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
-		<!-- Link to bootstrap stylesheet: cool looking buttons -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-		<!-- Link to project style sheet: particles -->
-		<link rel="stylesheet" href="public/stylesheets/style.css">
 
-		<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <!-- Scrip to use jquery, responsivevoice API, and resize modal -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
     <script src="https://code.responsivevoice.org/responsivevoice.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+		<!-- Link to bootstrap stylesheet: cool looking buttons -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+		<!-- Link to external style sheet: particles -->
+		<link rel="stylesheet" href="public/stylesheets/style.css">
+    <!-- -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-	</head>
+  </head>
 
 	<body>
-		<!-- Logout -->	
-		<button id="btnLogout"  class="btn btn-secondary" style="width:auto;">Logout</button>
+    <!-- Display user email -->
+    <p id="disp-txt" class="right"></p>
+    <!-- Logout Button -->  
+    <button id="btnLogout" class="btn btn-secondary">Logout</button>
 
-		<div id="container">
-        <!-- main title -->
-        <h1 class="main-title">Impression</h1>
-        <center><p> Paste image URL or brows files for image </p></center>
-        <!-- file browser & search bar -->
-        <div class="form-group">
-            <div class="input-group" id="custom">
-                <input type="text" onkeyup="handle(event)" class="form-control" id="url" placeholder='Image URL...' />
-                <span class="input-group-btn">
-                    <button class="btn btn-default btn-choose" id="analyze" type="button" onclick="processImage();" style="background-color: red;">
-                        <i class="fa fa-search-plus" aria-hidden="true" style="color: white ;"></i>
-                    </button>
-                </span>
-            </div>
-            <div class="text-center input-file">
-                <button type="button" id="url" class="btn btn-primary btn-lg" name="dom-file-upload">Browse...</button>
-            </div>
+    <h1 class="main-title">Impression</h1>
+
+    <center><div id="container" style="width:auto;">
+      <input id="inputImage" type="text" value="Enter image URL here." style="width: 50%" />
+      <button onclick="analyzeButtonClick()">Analyze Image</button>
+
+      <div id="wrapper" style="width:1020px; display:table;">
+        <div class="imageDiv">
+          <span id="captionSpan"></span>
+          <img id="sourceImage" onerror="common.imageLoadError()"/>
         </div>
+      </div>
+    </div></center>
+
+    <div class="subKeyDiv">
+      <input type="text" class="subKeyInput" name="subscriptionKeyInput" id="subscriptionKeyInput" onchange="common.subscriptionChange()" value="bec8ef1cee50434e9df96dc6b28d8dd2"/>
+      <input type="text" class="subRegion" name="subscriptionRegionSelect" id="subscriptionRegionSelect" onchange="common.subscriptionChange()" value="westcentralus"/>
     </div>
 
 		<div id="particles-js"></div>
@@ -56,9 +60,13 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 
 	</body>
+  <!-- Scrip to use Microsoft Azure Cognitive Services -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+  <script type="text/javascript" src="public/js/common.js"></script>
 
-	<!--  Browse buttons functionality -->
-	<script src="brow.js"></script>
+  <!--  Browse buttons functionality -->
+  <script src="brow_page.js"></script>
+  <script src="process_img.js"></script>
 	<!-- Stylseet for background -->
 	<script src="public/js/particles.min.js"></script>
 </html>

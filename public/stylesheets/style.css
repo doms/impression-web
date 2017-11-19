@@ -9,28 +9,42 @@ body {
   color: white;
   font-size: 30px;
 }
+
+.right {
+  position: absolute;
+  right: 0px;
+  width: 300px;
+  padding: 10px;
+
+  font-style: oblique;
+  color: white;
+}
+
+.center {
+  display: block;
+  margin: auto;
+  width: 40%;
+}
+
 .main-title {
   margin: 10% auto 5%;  /* Raise title a little */
   text-align: center;
-  font-size: 75px;
+  font-size: 85px;
   font-family: "Lobster";
   color: white;
   text-shadow: 0.09em 0.09em #000;
 }
 
-#demo {
-  font-family: "Lobster";
-  margin: 0 43%;
+.btn {
+  size: auto;
+  margin: 3% 1%;
+  right: 10px;
+  width: auto;
+  padding: 10px;
 }
 
 span {
   display: inline-block;
-}
-.btn {
-  margin: 10px;
-  padding: 10px 55px;
-  border: 3px groove black;
-  border-radius: 1px;
 }
 
 .Buttons:hover {
