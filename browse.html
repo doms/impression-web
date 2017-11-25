@@ -1,0 +1,40 @@
+<!DOCKTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Impression</title>
+        <meta name="description" content="learning from images">
+        <meta name="author" content="Anena Sims & Ranjeev Neurekar">
+        <!-- Responsive meta tag: ensures proper rendering and touch zooming for all devices -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+		
+        <link rel="stylesheet" href="stylesheets/style.css">
+        <!-- Bootstrap Style Sheet - Modal & Fancy Font -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+        <!-- Firebase CDN - Login & Database -->
+        <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+    </head>
+
+	<body>
+        <!-- Display Email & Logout Button Top Right -->  
+        <div class="sign-out">
+            <!-- Email -->
+            <p id="disp-txt" class="right"></p>
+            <div class="sign-out button"><button id="btnLogout" class="btn btn-secondary">"Logout"</button></div>
+        </div>
+        <h1 class="main-title">Impression</h1>
+
+		<div id="particles-js"></div>
+        
+        <!-- Particles CDN - Background -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.1.0/particles.min.js"></script>
+        <!-- Jquery CDN - Modal -->
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+        <!-- Bootstrap CDN - Modal -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	</body>
+    
+    <script src="public/js/particles.min.js"></script>
+    <script src="public/js/browse.js"></script>
+</html>

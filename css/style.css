@@ -1,0 +1,174 @@
+@import url("https://fonts.googleapis.com/css?family=Lobster");
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.main-title {
+  margin: 20% auto 5%;  /* Raise title a little */
+  text-align: center;
+  font-size: 75px;
+  font-family: "Lobster";
+  color: white;
+  text-shadow: 0.09em 0.09em #000;
+}
+
+/* ParticleJS */
+#particles-js {
+  background-color: #181a2c;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: -10;
+  top: 0;
+  left: 0;
+}
+
+span {
+  display: inline-block;
+}
+
+a {
+  text-decoration: none;
+  color: #990000;
+}
+
+.close {
+  float: right;
+  font-size: 46px;
+  margin-right: 18px;
+  color: grey;
+  cursor: pointer;
+}
+
+#panel {
+  text-align: center;
+}
+
+#tabbox {
+  text-align: center;
+  margin: 0 auto;
+  padding: 4% 0% 0%;
+  width: 94%;
+}
+
+.tab {
+  background: #505050;
+  display: inline-block;
+  line-height: 40px;
+  text-align: center;
+  width: 46%;
+  font-weight: bold;
+}
+
+.tab:hover {
+  background: #3a3a3a;
+}
+
+#tabbox a {
+  color: white;
+  margin: -3px;
+  padding: 1%;
+  text-decoration: none;
+}
+
+.signup {
+  margin-left: 1px;
+}
+
+.login-select {
+  background-color: #990000;
+}
+
+.login-select:hover {
+  background-color: #990000;
+}
+
+#login {
+  margin-left: -2px;
+}
+
+#signupbox {
+  padding: 10px 10px 36px;
+  height: 100%;
+  background-color: #fff;
+  margin-top: 1%;
+}
+
+#loginbox {
+  padding: 10px 10px 36px;
+  height: 100%;
+  display: none;
+  background-color: #fff;
+  margin-top: 1%;
+}
+
+#forgetbox {
+  padding: 10px 10px 36px;
+  height: 100%;
+  display: none;
+  background-color: #fff;
+  margin-top: 1%;
+}
+
+.modal {
+  /*display: none; Hidden by default */
+  font-family: helvetica;
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  padding-top: 60px;
+}
+
+#signupbox input {
+  width: 90%;
+  margin: 2% auto;
+  padding: 2%;
+  border: none;
+  background: #e6e6e6;
+}
+
+#loginbox input {
+  width: 90%;
+  margin: 2% auto;
+  padding: 2%;
+  border: none;
+  background: #e6e6e6;
+}
+
+#forgetbox input {
+  width: 90%;
+  margin: 2% auto;
+  padding: 2%;
+  border: none;
+  background: #e6e6e6;
+}
+
+#signupbox input::-webkit-input-placeholder,
+#loginbox input::-webkit-input-placeholder,
+#forgetbox input::-webkit-input-placeholder {
+  color: grey;
+}
+
+#loginbox a {
+  display: block;
+  margin: 2% 2% 4%;
+}
+
+#signupbox button,
+#loginbox button,
+#forgetbox button {
+  background: #990000;
+  border: none;
+  padding: 12px 30px;
+  color: white;
+  cursor: pointer;
+  width: 94%;
+}

@@ -1,0 +1,90 @@
+<!DOCKTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Impression</title>
+        <meta name="description" content="learning from images">
+        <meta name="author" content="Anena Sims & Ranjeev Neurekar">
+        <!-- Responsive meta tag: ensures proper rendering and touch zooming for all devices -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+        <link rel="stylesheet" href="css/style.css">
+        <!-- Bootstrap Style Sheet - Modal & Fancy Font -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+        <!-- Firebase CDN - Login & Database -->
+        <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+  </head>
+
+  <body>
+      <h1 class="main-title">Impression</h1>
+    
+        <!-- Accordion - Will Use for Something Else
+            <div class="panel-group" id="myaccordion">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title" data-target="#panel-1" data-toggle="collapse">Panel 1 test</h3>
+                </div>
+                <div class="panel-collapse collapse" id="panel-1">
+                    <div class="panel-body">
+                        <p>Test for panel body</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        -->
+      
+        <!-- Login / Sign Up Modal -->
+        <center><div class="modal" id="mymodal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button class="close" type="button" data-dismiss="modal">x</button>
+                        <h2 class="modal-title">Login / Sign Up</h2>
+                        <!-- Login / Sign Up Tabs -->
+                        <ul class="nav nav-tabs nav-justified">
+                            <li class="active"><a href="#loginTab" data-toggle="tab">Login</a></li>
+                            <li><a href="#signupTab" data-toggle="tab">Sign Up</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="loginTab" class="tab-pane active">
+                                <center><div id="container"   style="width:auto;">
+                                    <input   id="txtEmail"    type="email"    placeholder="Email"    style="width: 40%">
+                                    <input   id="txtPassword" type="password" placeholder="Password" style="width: 30%">
+                                    <button  id="btnLogin"    class="btn btn-primary">Log in</button> 
+                                </div></center>
+                            </div>
+                            <div id="signupTab" class="tab-pane">
+                                <center><div id="container"   style="width:auto;">
+                                    <input   id="txtEmail"    type="email"    placeholder="Email"    style="width: 40%">
+                                    <input   id="txtPassword" type="password" placeholder="Password" style="width: 30%">
+                                    <button  id="btnSignUp"   class="btn btn-primary">Sign Up</button> 
+                                </div></center>
+                            </div>
+                        </div>
+                        <!-- End of Tabs -->
+                    </div> 
+                    <div class="modal-body"></div>
+                </div>
+            </div>
+        </div></center>
+        <!-- End Login / Sign Up Modal -->
+      
+        <!-- Home Screen Buttons -->
+        <center><div id="container" style="width: auto;">
+            <button id="btnLogin"   class="btn btn-default btn-lg" data-toggle="modal" data-target="#mymodal">Log in </button>    
+            <button id="btnLookUp"  class="btn btn-default btn-lg">Quick Lookup</button>
+        </div></center>
+        <div id="particles-js"></div>
+      
+        <!-- Particles CDN - Background -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.1.0/particles.min.js"></script>
+        <!-- Jquery CDN - Modal -->
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+        <!-- Bootstrap CDN - Modal -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </body>
+    
+    <script src="public/js/auth.js"></script>
+  
+</html>
