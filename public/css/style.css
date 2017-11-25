@@ -9,14 +9,19 @@ body {
   color: white;
   font-size: 30px;
 }
-
 .main-title {
-  margin: 20% auto 5%;  /* Raise title a little */
+  margin: 20% auto 0%;
   text-align: center;
   font-size: 75px;
   font-family: "Lobster";
   color: white;
   text-shadow: 0.09em 0.09em #000;
+}
+
+#LISU {
+  font-family: "Lobster";
+  text-align: center;
+  margin: 2% auto;
 }
 
 #demo {

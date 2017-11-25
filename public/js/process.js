@@ -34,7 +34,7 @@ function processImage() {
   };
 
   var preview = document.getElementById("sourceImage").src;
-  var sourceImageUrl = document.getElementById("inputImage").value;
+  var sourceImageUrl = document.getElementById("url").value;
 
   console.log("preview.src:", preview);
 
@@ -215,7 +215,7 @@ function processImage() {
   });
 
   // clear input
-  document.getElementById("inputImage").value = "";
+  document.getElementById("url").value = "";
 }
 
 /*

@@ -19,15 +19,11 @@ body {
   text-shadow: 0.09em 0.09em #000;
 }
 
-.right {
-  position: absolute;
-  margin: 0% 82%;
-  width: 300px;
-  padding: 10px;
-
-  font-style: oblique;
-  font-size: 20px;
+.sign-out {
   color: white;
+  position: absolute;
+  top: 2em;
+  right: 5em;
 }
 
 .sign-out button {
@@ -62,11 +58,6 @@ body {
 
 .btn-primary {
   .btn(#428bca);
-}
-
-.btn-secondary {
-  margin: 3% 90%;
-  width: 8%;
 }
 
 /* ParticleJS */
