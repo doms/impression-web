@@ -3,28 +3,25 @@
 	<head>
 		<!-- Meta data must come first for some bootstrapped files -->
     <meta charset="utf-8">
+    <title>Impression</title>
     <meta name="description" content="learning from images">
     <meta name="author" content="Anena Sims & Ranjeev Neurekar">
     <!-- Responsive meta tag: ensures proper rendering and touch zooming for all devices -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <title>Impression</title>
-		
-		<!-- Scrip to use firebase data base -->
+		<!-- Scrip to use firebase & responsivevoice -->
 		<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
-
-    <!-- Scrip to use jquery, responsivevoice API, and resize modal -->
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
     <script src="https://code.responsivevoice.org/responsivevoice.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-		<!-- Link to bootstrap stylesheet: cool looking buttons -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-		<!-- Link to external style sheet: particles -->
-		<link rel="stylesheet" href="public/stylesheets/style.css">
-    <!-- -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- Bootstrap & external style sheets -->
+    <link rel="stylesheet" href="public/stylesheets/style.css">
+    <link rel="stylesheet" href="public/stylesheets/modal.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <!-- Dynamic Modal -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    
+    <!-- Cool Buttons -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
   </head>
 
 	<body>
@@ -32,12 +29,11 @@
     <p id="disp-txt" class="right"></p>
     <!-- Logout Button -->  
     <button id="btnLogout" class="btn btn-secondary">Logout</button>
-
     <h1 class="main-title">Impression</h1>
 
     <center><div id="container" style="width:auto;">
       <input id="inputImage" type="text" value="Enter image URL here." style="width: 50%" />
-      <button onclick="analyzeButtonClick()">Analyze Image</button>
+      <button onclick="processImage();">Analyze Image</button>
 
       <div id="wrapper" style="width:1020px; display:table;">
         <div class="imageDiv">
@@ -52,21 +48,64 @@
       <input type="text" class="subRegion" name="subscriptionRegionSelect" id="subscriptionRegionSelect" onchange="common.subscriptionChange()" value="westcentralus"/>
     </div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="ModalLabel">Results</h4>
+          </div>
+          <div class="modal-body" id="modal-results">
+            <img id="sourceImage" width="400" />
+          </div>
+          <div class="modal-footer">
+            <div class="btn-group" role="group" aria-label="..." style="float: left">
+              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Languages...
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" id="language" aria-labelledby="dropdownMenu2">
+                <li>
+                  <a href="#" value="en">English</a>
+                </li>
+                <li>
+                  <a href="#" value="es">Spanish</a>
+                </li>
+                <li>
+                  <a href="#" value="de">German</a>
+                </li>
+                <li>
+                  <a href="#" value="kr">Korean</a>
+                </li>
+              </ul>
+              <button type="button" class="btn btn-default" id="play-button">
+                <i class="fa fa-play" aria-hidden="true"></i>
+              </button>
+              <button type="button" class="btn btn-default" id="stop-button">
+                <i class="fa fa-stop" aria-hidden="true"></i>
+              </button>
+            </div>
+              <button type="button" class="btn btn-default" onclick="javascript:window.location.reload()" data-dismiss="modal">Close</button>
+              <button type="submit" id="save-results" class="btn btn-primary">Save Results</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
 		<div id="particles-js"></div>
-
-		<!-- CDN to bootstrap code: cool looking buttons (KEEP THIS ORDER!)-->
-    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-
 	</body>
+  <!-- CDN to bootstrap code: cool looking buttons (KEEP THIS ORDER!)-->
+  <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" ></script>
   <!-- Scrip to use Microsoft Azure Cognitive Services -->
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
   <script type="text/javascript" src="public/js/common.js"></script>
-
-  <!--  Browse buttons functionality -->
-  <script src="brow_page.js"></script>
-  <script src="process_img.js"></script>
-	<!-- Stylseet for background -->
-	<script src="public/js/particles.min.js"></script>
+  <script src="public/js/brow_page.js"></script>
+  <script src="public/js/helper.js"></script>
+  <script src="public/js/tts.js"></script>
+  <script src="public/js/process.js"></script>
 </html>
