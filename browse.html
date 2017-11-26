@@ -1,4 +1,4 @@
-<!DOCKTYPE html>
+    <!DOCKTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -9,24 +9,63 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 		
         <link rel="stylesheet" href="stylesheets/style.css">
+        <link rel="stylesheet" href="stylesheets/modal.css">
         <!-- Bootstrap Style Sheet - Modal & Fancy Font -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
         <!-- Firebase CDN - Login & Database -->
         <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+        <!-- Microsoft CDN - Analyze Image -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
     </head>
 
 	<body>
         <!-- Display Email & Logout Button Top Right -->  
         <div class="sign-out">
             <!-- Email -->
-            <p id="disp-txt" class="right"></p>
-            <div class="sign-out button"><button id="btnLogout" class="btn btn-secondary">"Logout"</button></div>
+            <p id="disp-txt"></p>
+            <div class="sign-out button"><button id="btnLogout" class="btn btn-secondary">Logout</button></div>
         </div>
-        <h1 class="main-title">Impression</h1>
-
-		<div id="particles-js"></div>
+        <!-- End of Logout Display -->
         
+        <!-- URL Bar & File Browse Button -->  
+        <div class="container">
+            <h1 class="main-title">Impression</h1>  
+            <p class="instructions">Paste image URL or click <strong>Browse</strong> to search from file</p>
+            <input id="inputImage" type="text" value="image url here..."/>
+            <button class="btn btn-secondary" id="analyze" onclick="analyzeButtonClick()" data-toggle="modal" data-target="#imgmodal"></button>
+        </div>
+        
+        <!-- Display Results in Modal -->
+        <center><div class="modal in " id="imgmodal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button class="btn-close" type="button" data-dismiss="modal">x</button>
+                        <h2 class="modal-title">Results</h2>
+                    </div> 
+                    <div class="modal-body">
+                    <!-- Image & Text Display -->
+                        <div id="wrapper">
+                            <div id="imageDiv">
+                                <img id="sourceImage" onerror="common.imageLoadError()"/>
+                                <span id="captionSpan"></span>
+                            </div>
+                        </div>
+                    <!-- End of Image & Text Display -->
+                    </div>
+                    <div class="modal-footer">
+                        <div class="save button"><button class="btn btn-primary">Save</button></div>
+                        <!-- Text to Talk -->
+                        <p>Reactive Place Holder</p>
+                        <!-- End of Text to Talk -->
+                    </div>
+                </div>
+            </div>
+        </div></center>
+        <!-- End of Display Results in Modal -->
+                
+		<div id="particles-js"></div>
         <!-- Particles CDN - Background -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.1.0/particles.min.js"></script>
         <!-- Jquery CDN - Modal -->
@@ -37,4 +76,5 @@
     
     <script src="public/js/particles.min.js"></script>
     <script src="public/js/browse.js"></script>
+    <script src="public/js/procImg.js"></script>
 </html>
