@@ -4,77 +4,109 @@
         <meta charset="utf-8">
         <title>Impression</title>
         <meta name="description" content="learning from images">
-        <meta name="author" content="Anena Sims & Ranjeev Neurekar">
-        <!-- Responsive meta tag: ensures proper rendering and touch zooming for all devices -->
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-		
-        <link rel="stylesheet" href="stylesheets/style.css">
-        <link rel="stylesheet" href="stylesheets/modal.css">
-        <!-- Bootstrap Style Sheet - Modal & Fancy Font -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-        <!-- Firebase CDN - Login & Database -->
-        <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
-        <!-- Microsoft CDN - Analyze Image -->
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+        <meta name="author" content="Dominic Young, Anena Sims, & Ranjeev Neurekar">
+        <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Ensures proper rendering and touch zooming for all devices -->
+        
+        <link rel="stylesheet" href="stylesheets/style.css" type="text/css">
+        <link rel="stylesheet" href="stylesheets/modal.css" type="text/css">
+        <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script> <!-- Jquery CDN - Modal -->
+        <script src="https://code.responsivevoice.org/responsivevoice.js"></script> <!-- Responsive CDN - Text to Speach -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script><!-- Bootstrap CDN - Modal -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"><!-- Bootstrap Stylesheet - Modal -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"><!-- Bootstrap Stylesheet - Font -->
+        <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script> <!-- Firebase CDN - Login & Database -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script> <!-- Microsoft CDN - Analyze Image -->
+        
+        
     </head>
 
 	<body>
         <!-- Display Email & Logout Button Top Right -->  
         <div class="sign-out">
-            <!-- Email -->
-            <p id="disp-txt"></p>
-            <div class="sign-out button"><button id="btnLogout" class="btn btn-secondary">Logout</button></div>
-        </div>
-        <!-- End of Logout Display -->
+            <p id="disp-txt"></p> <!-- Email -->
+            <div class="sign-out button"><button id="btnLogout" class="btn btn-secondary">Logout / Return</button></div>
+        </div> 
         
-        <!-- URL Bar & File Browse Button -->  
-        <div class="container">
-            <h1 class="main-title">Impression</h1>  
-            <p class="instructions">Paste image URL or click <strong>Browse</strong> to search from file</p>
-            <input id="inputImage" type="text" value="image url here..."/>
-            <button class="btn btn-secondary" id="analyze" onclick="analyzeButtonClick()" data-toggle="modal" data-target="#imgmodal"></button>
+        <!-- file browser & search bar -->
+        <div id="container">
+            <h1 class="main-title">Impression</h1>
+
+            <div class="form-group">
+                <div class="input-group" id="custom">
+                    <input type="text" onkeyup="handle(event)" class="form-control" id="url" placeholder='Image URL...' />
+                    <span class="input-group-btn">
+                        <button class="btn btn-default btn-choose" id="analyze" type="button" onclick="processImage();" style="background-color: red;">
+                            <i class="fa fa-search-plus" aria-hidden="true" style="color: white ;"></i>
+                        </button>
+                    </span>
+                </div>
+                <div class="text-center input-file">
+                    <button type="button" id="url" class="btn btn-primary btn-lg" name="dom-file-upload">Browse...</button>
+                </div>
+            </div>
         </div>
         
-        <!-- Display Results in Modal -->
-        <center><div class="modal in " id="imgmodal">
-            <div class="modal-dialog">
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel">
+            <div class="modal-dialog" id="myDiv" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button class="btn-close" type="button" data-dismiss="modal">x</button>
-                        <h2 class="modal-title">Results</h2>
-                    </div> 
-                    <div class="modal-body">
-                    <!-- Image & Text Display -->
-                        <div id="wrapper">
-                            <div id="imageDiv">
-                                <img id="sourceImage" onerror="common.imageLoadError()"/>
-                                <span id="captionSpan"></span>
-                            </div>
-                        </div>
-                    <!-- End of Image & Text Display -->
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="ModalLabel">Results</h4>
+                    </div>
+                    <div class="modal-body" id="modal-results">
+                        <img id="sourceImage" width="400" />
                     </div>
                     <div class="modal-footer">
-                        <div class="save button"><button class="btn btn-primary">Save</button></div>
-                        <!-- Text to Talk -->
-                        <p>Reactive Place Holder</p>
-                        <!-- End of Text to Talk -->
+                        <div class="btn-group" role="group" aria-label="..." style="float: left">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Languages...
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" id="language" aria-labelledby="dropdownMenu2">
+                                <li>
+                                    <a href="#" value="en">English</a>
+                                </li>
+                                <li>
+                                    <a href="#" value="es">Spanish</a>
+                                </li>
+                                <li>
+                                    <a href="#" value="de">German</a>
+                                </li>
+                                <li>
+                                    <a href="#" value="kr">Korean</a>
+                                </li>
+                            </ul>
+                            <button type="button" class="btn btn-default" id="play-button">
+                                <i class="fa fa-play" aria-hidden="true"></i>
+                            </button>
+                            <button type="button" class="btn btn-default" id="stop-button">
+                                <i class="fa fa-stop" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                        <button type="button" class="btn btn-default" onclick="javascript:window.location.reload()" data-dismiss="modal">Close</button>
+                        <button type="submit" id="save-results" class="btn btn-primary">Save Results</button>
                     </div>
                 </div>
             </div>
-        </div></center>
-        <!-- End of Display Results in Modal -->
-                
+        </div>
+           
 		<div id="particles-js"></div>
         <!-- Particles CDN - Background -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.1.0/particles.min.js"></script>
+        <!-- Blob CDN - File handling for image browsing -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/blob-util/1.3.0/blob-util.min.js"></script>
         <!-- Jquery CDN - Modal -->
         <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
         <!-- Bootstrap CDN - Modal -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	</body>
     
-    <script src="public/js/particles.min.js"></script>
-    <script src="public/js/browse.js"></script>
-    <script src="public/js/procImg.js"></script>
+    <script src="js/particles.min.js"></script>
+    <script src="js/browse.js"></script>
+    <script src="js/procImg.js"></script>
+    <script src="js/helpers.js"></script>
+    <script src="js/tts.js"></script>
 </html>
