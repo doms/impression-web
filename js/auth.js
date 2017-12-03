@@ -52,7 +52,7 @@
             btnLogout.classList.remove('hide');
         }
         else{
-            alert('not logged in');
+            //alert('not logged in');
             btnLogout.classList.add('hide');
         }
     });
