@@ -18,6 +18,16 @@
     const btnSignUp = document.getElementById('btnSignUp');
     const btnLogout = document.getElementById('btnLogout');
     
+    // Get the modal
+    var modal = document.getElementById('id01');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+    
     // Add login event for btnLookUp button
 	btnLookUp.addEventListener('click', e => {
 		window.location.href="browse.html";
@@ -57,6 +67,5 @@
         }
     });
 }());
-
 
 
