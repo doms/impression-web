@@ -4,21 +4,20 @@
         <meta charset="utf-8">
         <title>Impression</title>
         <meta name="description" content="learning from images">
-        <meta name="author" content="Dominic Young, Anena Sims, & Ranjeev Neurekar">
+        <meta name="author" content="Anena Sims, Ranjeev Neurekar & Dominic Young">
         <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Ensures proper rendering and touch zooming for all devices -->
         
         <!-- Stylesheets for Browse Page -->
+        <link rel="stylesheet" href="css/browse.css">
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-        <link rel="stylesheet" href="css/browse.css">
+        
         <!-- Stylesheets for Modal -->
         <link rel="stylesheet" href="stylesheets/modal.css" type="text/css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <!--<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>  Jquery CDN - Modal -->
         <script src="https://code.responsivevoice.org/responsivevoice.js"></script> <!-- Responsive CDN - Text to Speach -->
         <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> Bootstrap CDN - Modal -->
-        
-
         <!-- Microsoft CDN - Analyze Image -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script> 
         
@@ -30,44 +29,37 @@
             <div class="w3-display-topleft w3-padding-large w3-xlarge"> <!-- Display Email & Logout Button Top Right -->
                 <p id="disp-txt"></p> <!-- Email -->
                 <div class="sign-out button">
-                    <button id="btnLogout" class="btnBrow">Logout</button>
-                    <button id="btnReturn" class="btnBrow">Home</button>
-                    <button id="btnAccount" class="btnBrow">Account</button>
+                    <button id="btnLogout" class="btnHome">Logout</button>
+                    <button id="btnReturn" class="btnHome">Home</button>
+                    <button id="btnAccount" class="btnHome">Account</button>
                 </div>
             </div> <!-- End Display Email & Logout Button -->
 
-            
+            <!-- file browser & search bar -->
             <div class="w3-display-middle">
                 <h1 class="w3-jumbo w3-animate-top" style="margin: 1% auto;">IMPRESSION</h1>
                 <hr class="w3-border-white" style="margin:auto;width:60%">
-                <p class="w3-large w3-center">giving voice to image</p>
+                <p class="w3-large w3-center">Enter url or browse for file</p>
                 <div class="form-group">
                     <div class="input-group" id="custom">
                         <input type="text" onkeyup="handle(event)" class="form-control" id="url" placeholder='Image URL...' />
                         <span class="input-group-btn">
-                            <button class="btn btn-default btn-choose" id="analyze" type="button" onclick="processImage();" style="background-color: red;">
+                            <button class="btn btn-default btn-choose" id="analyze" type="button" onclick="processImage();">
                                 <i class="fa fa-search-plus" aria-hidden="true" style="color: white ;"></i>
                             </button>
                         </span>
                     </div>
                     <div class="text-center input-file">
-                        <button type="button" id="url" class="btn btn-primary btn-lg" name="dom-file-upload">Browse...</button>
+                        <button type="button" id="btnURL" class="btn btn-primary btn-lg" name="dom-file-upload">Browse...</button>
                     </div>
                 </div>
             </div>
-        <div class="w3-display-bottomleft w3-padding-large">
-            Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">microsoftazure.com</a>
-        </div>
-    </div>
-           
-        
-        <!-- file browser & search bar -->
-        <div id="container">
-
-            
+            <div class="w3-display-bottomleft w3-padding-large">
+                Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">microsoftazure.com</a>
+            </div>
         </div>
         
-        <!-- Modal -->
+        <!-- Image Display Modal -->
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel">
             <div class="modal-dialog" id="myDiv" role="document">
                 <div class="modal-content">
@@ -108,11 +100,11 @@
                             </button>
                         </div>
                         <button type="button" class="btn btn-default" onclick="javascript:window.location.reload()" data-dismiss="modal">Close</button>
-                        <button type="submit" id="save-results" class="btn btn-primary">Save Results</button>
+                        <button type="button" id="btnSave" class="btn btn-primary" onclick="writeUserData()">Save Results</button>
                     </div>
                 </div>
             </div>
-        </div>
+        </div
         
         <!-- Firebase CDN - Login & Database -->
         <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
@@ -127,6 +119,7 @@
     
     <script src="js/browse.js"></script>
     <script src="js/procImg.js"></script>
+        
     <script src="js/helpers.js"></script>
     <script src="js/tts.js"></script>
 </html>

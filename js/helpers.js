@@ -1,5 +1,3 @@
-
-
 function handle(e) {
   if (e.keyCode === 13) {
     processImage();
@@ -33,11 +31,12 @@ function previewFile() {
 
 function makeBlob(dataURL) {
   var BASE64_MARKER = ";base64,";
+
   if (dataURL.indexOf(BASE64_MARKER) == -1) {
     var parts = dataURL.split(",");
     var contentType = parts[0].split(":")[1];
     var raw = decodeURIComponent(parts[1]);
-    return new Blob([raw], { type: contentType });
+      return new Blob([raw], { type: contentType });
   }
 
   var parts = dataURL.split(BASE64_MARKER);
@@ -83,34 +82,6 @@ $(function() {
   handleFileUpload();
 });
 
-// handle modal
-$(document).ready(function() {
-  $(".signup").addClass("login-select");
-  $(".tab").click(function() {
-    var X = $(this).attr("id");
-
-    if (X == "signup") {
-      $("#login").removeClass("login-select");
-      $("#signup").addClass("login-select");
-      $("#loginbox").hide(300);
-      $("#signupbox").show(300);
-      $("#forgetbox").hide(300);
-    } else {
-      $("#signup").removeClass("login-select");
-      $("#login").addClass("login-select");
-      $("#signupbox").hide(300);
-      $("#loginbox").show(300);
-      $("#forgetbox").hide(300);
-    }
-  });
-
-  $(".forgot-button").click(function() {
-    $("#signupbox").hide(300);
-    $("#loginbox").hide(300);
-    $("#forgetbox").show(300);
-  });
-});
-
 // Get the modal
 var modal = document.getElementById("id01");
 
@@ -121,64 +92,9 @@ window.onclick = function(event) {
   }
 };
 
-// launch demo
-var demo = $("#demo");
-demo.on("click", function() {
-  $(this)
-    .closest("form")
-    .submit();
-});
-
-// save results to user
+/* save results to user
 var submitForm = $("#save-results");
 submitForm.on("click", function() {
   $("#submit-form").submit();
-});
+});*/
 
-// auth modal
-$(".form")
-  .find("input, textarea")
-  .on("keyup blur focus", function(e) {
-    var $this = $(this),
-      label = $this.prev("label");
-
-    if (e.type === "keyup") {
-      if ($this.val() === "") {
-        label.removeClass("active highlight");
-      } else {
-        label.addClass("active highlight");
-      }
-    } else if (e.type === "blur") {
-      if ($this.val() === "") {
-        label.removeClass("active highlight");
-      } else {
-        label.removeClass("highlight");
-      }
-    } else if (e.type === "focus") {
-      if ($this.val() === "") {
-        label.removeClass("highlight");
-      } else if ($this.val() !== "") {
-        label.addClass("highlight");
-      }
-    }
-  });
-
-$(".tab a").on("click", function(e) {
-  e.preventDefault();
-
-  $(this)
-    .parent()
-    .addClass("active");
-  $(this)
-    .parent()
-    .siblings()
-    .removeClass("active");
-
-  target = $(this).attr("href");
-
-  $(".tab-content > div")
-    .not(target)
-    .hide();
-
-  $(target).fadeIn(600);
-});

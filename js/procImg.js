@@ -1,7 +1,8 @@
-const microsoftApiKey = "bec8ef1cee50434e9df96dc6b28d8dd2";
+const microsoftApiKey = "34797515fa304ab181cfbc9b8fa00f7f";
 const googleApiKey = "AIzaSyAegC2YEg7TclrJD_sDnJCSSyNjihnf93A";
 
-var myVar;
+var pleaseWork;
+var micRes, gooRes;
 
 function myFunction() {
     myVar = setTimeout(showPage, 300);
@@ -17,6 +18,9 @@ function compareResults(microsoft, google) {
   var microsoftResults = JSON.parse(JSON.stringify(microsoft, null, 2));
   var googleResults = JSON.parse(JSON.stringify(google, null, 2));
 
+    micRes = microsoftResults.description.captions[0].confidence * 100;
+    gooRes = googleResults.responses[0].labelAnnotations[0].score * 100;
+    
   console.log(
       "microsoft:",
       microsoftResults.description.captions[0].confidence * 100
@@ -51,7 +55,7 @@ function processImage() {
 
   // add photo to img tag if from URL
   if (sourceImageUrl) {
-    document.querySelector("#sourceImage").src = sourceImageUrl;
+    pleaseWork = document.querySelector("#sourceImage").src = sourceImageUrl;
   }
 
   // dynamically create request header
@@ -228,10 +232,12 @@ function processImage() {
       });
     }
   });
-
+    
   // clear input
   document.getElementById("url").value = "";
 }
+
+
 
 /*
   Input requirements:

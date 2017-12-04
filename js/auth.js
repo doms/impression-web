@@ -1,3 +1,4 @@
+var track;
 (function () {
     // Initialize Firebase
     var config = {
@@ -35,6 +36,7 @@
     
     btnLogin.addEventListener('click', e => {
         const email = txtEmail.value;
+        usrEmail = email;
         const pass = txtPassword.value;
         const auth = firebase.auth();
 
@@ -44,6 +46,7 @@
     
     btnSignUp.addEventListener('click', e => {
         const email = newEmail.value;
+        usrEmail = email;
         const pass = newPassword.value;
         const auth = firebase.auth();
 
@@ -58,11 +61,17 @@
     
     firebase.auth().onAuthStateChanged(firebaseUser => {
         if(firebaseUser){
+            //var firebaseRef = firebase.database().ref().child("User"+i).set(usrEmail);
+            /* together I might can use this to get var saved as key */
+            //var firebaseRef = firebase.database().ref().child("User"+i);
+            //var firebaseRef = firebase.database().ref().set(usrEmail);
+            
+            
+            
             window.location.href="browse.html";
             btnLogout.classList.remove('hide');
         }
         else{
-            //alert('not logged in');
             btnLogout.classList.add('hide');
         }
     });

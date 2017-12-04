@@ -1,3 +1,5 @@
+var userEmail;
+var userID; 
 (function () {
 	// Initialize Firebase
     var config = {
@@ -10,9 +12,10 @@
     };
     firebase.initializeApp(config);
 
+    /* Login / Signout Features */
 	// Logout button
 	const btnLogout = document.getElementById('btnLogout');
-
+     
 	// On clicking logout
 	btnLogout.addEventListener('click', e => {
 		firebase.auth().signOut();
@@ -32,13 +35,18 @@
 
 	// Realtime listener to authinticate account and track login state
     firebase.auth().onAuthStateChanged(firebaseUser =>{
+        
 		if(firebaseUser){
 			console.log('logged in');
 			var email = firebaseUser.email;
+            userID = firebaseUser.uid;
+            userEmail = email;
             document.getElementById("disp-txt").innerHTML = email;
             btnLogout.classList.remove('hide');
             btnAccount.classList.remove('hide');
             btnReturn.classList.add('hide');
+
+            
 		}
 		else{
 			//console.log('not logged in');
@@ -49,3 +57,9 @@
 		}
 	});
 }());
+
+// Saving Data
+function writeUserData() {
+    var userId = Math.floor(Math.random() * 20);
+    firebase.database().ref('Users\ ' + userID).set({email: userEmail,image_URL : pleaseWork, microsoft_Results : micRes, google_results: gooRes});
+}
