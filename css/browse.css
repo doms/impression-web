@@ -9,11 +9,35 @@ body,h1 {font-family: "Raleway", sans-serif}
 
 body, html {height: 100%}
 
-.btnBrow {
+.btnHome {
     background-color: ghostwhite; 
     border: none;
     color: black;
     padding: 10px 10px;
+    text-align: center;
+    font-style: oblique;
+    display: inline-block;
+    font-size: 16px;
+}
+
+#btnURL {
+    margin: 2% auto 0%;
+    background-color: ghostwhite; 
+    border: none;
+    color: black;
+    padding: 10px 10px;
+    text-align: center;
+    font-style: oblique;
+    display: inline-block;
+    font-size: 16px;
+}
+
+#analyze{
+    margin: auto 10%;
+    background-color: cadetblue; 
+    border: none;
+    color: black;
+    padding: 80% 10px;
     text-align: center;
     font-style: oblique;
     display: inline-block;

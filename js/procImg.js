@@ -1,4 +1,4 @@
-const microsoftApiKey = "bec8ef1cee50434e9df96dc6b28d8dd2";
+const microsoftApiKey = "34797515fa304ab181cfbc9b8fa00f7f";
 const googleApiKey = "AIzaSyAegC2YEg7TclrJD_sDnJCSSyNjihnf93A";
 
 var myVar;
