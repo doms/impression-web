@@ -35,6 +35,7 @@
     
     btnLogin.addEventListener('click', e => {
         const email = txtEmail.value;
+        usrEmail = email;
         const pass = txtPassword.value;
         const auth = firebase.auth();
 
@@ -44,6 +45,7 @@
     
     btnSignUp.addEventListener('click', e => {
         const email = newEmail.value;
+        usrEmail = email;
         const pass = newPassword.value;
         const auth = firebase.auth();
 
@@ -60,10 +62,11 @@
         if(firebaseUser){
             window.location.href="browse.html";
             btnLogout.classList.remove('hide');
+            btnSave.classList.remove('hide');
         }
         else{
-            //alert('not logged in');
             btnLogout.classList.add('hide');
+            btnSave.classList.add('hide');
         }
     });
 }());

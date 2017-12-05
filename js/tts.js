@@ -23,4 +23,4 @@ $("#stop-button").on("click", function() {
   }
 });
 
-// TODO: implement different languages (watch for change on dropdown menu)
+// TODO: implement different languages (watch for change on drop down menu)

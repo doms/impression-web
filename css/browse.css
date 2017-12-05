@@ -7,7 +7,11 @@
 
 body,h1 {font-family: "Raleway", sans-serif}
 
-body, html {height: 100%}
+body, html {
+    height: 100%;
+}
+   
+
 
 .btnHome {
     background-color: ghostwhite; 
@@ -30,14 +34,14 @@ body, html {height: 100%}
     font-style: oblique;
     display: inline-block;
     font-size: 16px;
+    font-weight: 600;
 }
 
 #analyze{
-    margin: auto 10%;
     background-color: cadetblue; 
     border: none;
     color: black;
-    padding: 80% 10px;
+    padding: 25% 10px;
     text-align: center;
     font-style: oblique;
     display: inline-block;
