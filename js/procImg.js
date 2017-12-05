@@ -2,7 +2,7 @@ const microsoftApiKey = "34797515fa304ab181cfbc9b8fa00f7f";
 const googleApiKey = "AIzaSyAegC2YEg7TclrJD_sDnJCSSyNjihnf93A";
 
 var pleaseWork;
-var micRes, gooRes;
+var micRes, gooRes, descrip;
 
 function myFunction() {
     myVar = setTimeout(showPage, 300);
@@ -98,7 +98,7 @@ function processImage() {
         // remove base64 tag
         var formattedInput = preview.replace(/(.*,)/, "");
         console.log("Formatted:", formattedInput);
-
+          pleaseWork = formattedInput;
         requests = {
           requests: [
             {
@@ -139,7 +139,6 @@ function processImage() {
 
         // Might have to set size....
         beforeSend: function(xhrObj) {
-          // xhrObj.setRequestHeader("Content-Length", formattedInput.length);
           xhrObj.setRequestHeader("Content-Type", "application/json");
         },
 
@@ -154,7 +153,7 @@ function processImage() {
           var accurateResults = compareResults(microsoftResults, googleResults);
           console.log("accurate results:", accurateResults);
             
-          // microsoft
+          // Microsoft
           if (accurateResults.name === "microsoft") {
               if(accurateResults.data.description.captions[0].confidence * 100 < 80)
                   alert("Microsoft accuracy of: "+accurateResults.data.description.captions[0].confidence * 100+" is below 80%");
@@ -168,14 +167,10 @@ function processImage() {
                 "</h1>" +
                 "<h1 id='api-description' style='display: none;'>" +
                 accurateResults.data.description.captions[0].text +
-                "</h1>" +
-                "<form action=/save method='post' id='submit-form' style='display: none;'>" +
-                "<input type='text' name='url'/>" +
-                "<input type='text' name='confidence'/>" +
-                "<input type='text' name='text'/>" +
-                "<input type='text' name='tags'/>" +
-                "</form>"
+                "</h1>" 
             );
+              descrip = accurateResults.data.description.captions[0].text;
+              alert(descrip);
 
             // programmatically fill input form for /save
             $("input[name='url']").val(sourceImageUrl);
@@ -204,14 +199,9 @@ function processImage() {
                 "<h1 id='api-description' style='display: none;'>" +
                 accurateResults.data.responses[0].labelAnnotations[0]
                   .description +
-                "</h1>" +
-                "<form action=/save method='post' id='submit-form' style='display: none;'>" +
-                "<input type='text' name='url'/>" +
-                "<input type='text' name='confidence'/>" +
-                "<input type='text' name='text'/>" +
-                "<input type='text' name='tags'/>" +
-                "</form>"
+                "</h1>" 
             );
+              descrip = accurateResults.data.responses[0].labelAnnotations[0].description;
 
             // programmatically fill input form for /save
             $("input[name='url']").val(sourceImageUrl);

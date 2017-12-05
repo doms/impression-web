@@ -12,7 +12,6 @@ var userID;
     };
     firebase.initializeApp(config);
 
-    /* Login / Signout Features */
 	// Logout button
 	const btnLogout = document.getElementById('btnLogout');
      
@@ -33,7 +32,7 @@ var userID;
 		window.location.href="account.html";
 	});
 
-	// Realtime listener to authinticate account and track login state
+	// Real-time listener to authenticate account and track login state
     firebase.auth().onAuthStateChanged(firebaseUser =>{
         
 		if(firebaseUser){
@@ -44,15 +43,14 @@ var userID;
             document.getElementById("disp-txt").innerHTML = email;
             btnLogout.classList.remove('hide');
             btnAccount.classList.remove('hide');
+            btnSave.classList.remove('hide');
             btnReturn.classList.add('hide');
-
-            
 		}
 		else{
-			//console.log('not logged in');
             document.getElementById("disp-txt").innerHTML = "Sign up to save history";
             btnLogout.classList.add('hide');
             btnAccount.classList.add('hide');
+            btnSave.classList.add('hide');
 			btnReturn.classList.remove('hide');
 		}
 	});
@@ -60,6 +58,26 @@ var userID;
 
 // Saving Data
 function writeUserData() {
-    var userId = Math.floor(Math.random() * 20);
-    firebase.database().ref('Users\ ' + userID).set({email: userEmail,image_URL : pleaseWork, microsoft_Results : micRes, google_results: gooRes});
+    if(authError){
+        aleart(authError)
+    }
+    
+    // A image entry.
+    var postData = {
+        User_Email: userEmail,
+        Image_URL : pleaseWork,
+        Results_Microsoft : micRes,
+        Results_Google : gooRes,
+        Image_Description: descrip
+    };
+
+    // Get a key for a new image.
+    var newPostKey = firebase.database().ref().child('images').push().key;
+
+    // Write the new image's data simultaneously in the posts list and the user's post list.
+    var updates = {};
+    updates['/images/' + newPostKey] = postData;
+    updates['/user-images/' + userID + '/' + newPostKey] = postData;
+    
+    return firebase.database().ref().update(updates);
 }

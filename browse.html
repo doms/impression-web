@@ -15,25 +15,27 @@
         <!-- Stylesheets for Modal -->
         <link rel="stylesheet" href="stylesheets/modal.css" type="text/css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <!--<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>  Jquery CDN - Modal -->
-        <script src="https://code.responsivevoice.org/responsivevoice.js"></script> <!-- Responsive CDN - Text to Speach -->
-        <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> Bootstrap CDN - Modal -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+        <!-- Responsive CDN - Text to Speech -->
+        <script src="https://code.responsivevoice.org/responsivevoice.js"></script> 
         <!-- Microsoft CDN - Analyze Image -->
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script> 
-        
-        
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>     
     </head>
 
 	<body>
-        <div class="bgimg w3-display-container w3-animate-opacity w3-text-white"> <!-- Browse Screen Design -->
-            <div class="w3-display-topleft w3-padding-large w3-xlarge"> <!-- Display Email & Logout Button Top Right -->
+        <!-- Browse Screen Design -->
+        <div class="bgimg w3-display-container w3-animate-opacity w3-text-white"> 
+            
+            <!-- Display Email & Logout Button Top Right -->
+            <div class="w3-display-topleft w3-padding-large w3-xlarge"> 
                 <p id="disp-txt"></p> <!-- Email -->
                 <div class="sign-out button">
                     <button id="btnLogout" class="btnHome">Logout</button>
                     <button id="btnReturn" class="btnHome">Home</button>
                     <button id="btnAccount" class="btnHome">Account</button>
                 </div>
-            </div> <!-- End Display Email & Logout Button -->
+            </div> 
 
             <!-- file browser & search bar -->
             <div class="w3-display-middle">
@@ -92,19 +94,18 @@
                                     <a href="#" value="kr">Korean</a>
                                 </li>
                             </ul>
-                            <button type="button" class="btn btn-default" id="play-button">
-                                <i class="fa fa-play" aria-hidden="true"></i>
-                            </button>
-                            <button type="button" class="btn btn-default" id="stop-button">
-                                <i class="fa fa-stop" aria-hidden="true"></i>
-                            </button>
                         </div>
-                        <button type="button" class="btn btn-default" onclick="javascript:window.location.reload()" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-default" id="play-button">
+                            <i class="fa fa-play" aria-hidden="true"></i>
+                        </button>
+                        <button type="button" class="btn btn-default" id="stop-button">
+                            <i class="fa fa-stop" aria-hidden="true"></i>
+                        </button>
                         <button type="button" id="btnSave" class="btn btn-primary" onclick="writeUserData()">Save Results</button>
                     </div>
                 </div>
             </div>
-        </div
+        </div>
         
         <!-- Firebase CDN - Login & Database -->
         <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
@@ -119,7 +120,6 @@
     
     <script src="js/browse.js"></script>
     <script src="js/procImg.js"></script>
-        
     <script src="js/helpers.js"></script>
     <script src="js/tts.js"></script>
 </html>

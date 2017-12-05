@@ -1,4 +1,3 @@
-var track;
 (function () {
     // Initialize Firebase
     var config = {
@@ -61,18 +60,13 @@ var track;
     
     firebase.auth().onAuthStateChanged(firebaseUser => {
         if(firebaseUser){
-            //var firebaseRef = firebase.database().ref().child("User"+i).set(usrEmail);
-            /* together I might can use this to get var saved as key */
-            //var firebaseRef = firebase.database().ref().child("User"+i);
-            //var firebaseRef = firebase.database().ref().set(usrEmail);
-            
-            
-            
             window.location.href="browse.html";
             btnLogout.classList.remove('hide');
+            btnSave.classList.remove('hide');
         }
         else{
             btnLogout.classList.add('hide');
+            btnSave.classList.add('hide');
         }
     });
 }());

@@ -92,9 +92,3 @@ window.onclick = function(event) {
   }
 };
 
-/* save results to user
-var submitForm = $("#save-results");
-submitForm.on("click", function() {
-  $("#submit-form").submit();
-});*/
-
