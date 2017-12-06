@@ -28,8 +28,9 @@ var userID;
 	})
     
     // Go to account page
+    // TODO: DISPLAY SAVED DATA TO USER ACCOUNT PAGE IF TIME
 	btnAccount.addEventListener('click', e => {
-		window.location.href="account.html";
+		//window.location.href="account.html";
 	});
 
 	// Real-time listener to authenticate account and track login state
@@ -42,7 +43,9 @@ var userID;
             userEmail = email;
             document.getElementById("disp-txt").innerHTML = email;
             btnLogout.classList.remove('hide');
+            /* TODO: DISPLAY SAVED DATA TO USER ACCOUNT PAGE IF TIME */
             btnAccount.classList.add('hide');
+            
             btnSave.classList.remove('hide');
             btnReturn.classList.add('hide');
 		}
@@ -57,7 +60,7 @@ var userID;
 }());
 
 // Saving Data
-function writeUserData() {
+function writeUserData() {    
     // A image entry.
     var postData = {
         User_Email: userEmail,
@@ -75,6 +78,6 @@ function writeUserData() {
     updates['/images/' + newPostKey] = postData;
     updates['/user-images/' + userID + '/' + newPostKey] = postData;
     
-    alert("Image Saved...");
+    alert("Saved Image to: "+userEmail);
     return firebase.database().ref().update(updates);
 }
