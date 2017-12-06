@@ -42,7 +42,7 @@ var userID;
             userEmail = email;
             document.getElementById("disp-txt").innerHTML = email;
             btnLogout.classList.remove('hide');
-            btnAccount.classList.remove('hide');
+            btnAccount.classList.add('hide');
             btnSave.classList.remove('hide');
             btnReturn.classList.add('hide');
 		}
@@ -58,10 +58,6 @@ var userID;
 
 // Saving Data
 function writeUserData() {
-    if(authError){
-        aleart(authError)
-    }
-    
     // A image entry.
     var postData = {
         User_Email: userEmail,
@@ -79,5 +75,6 @@ function writeUserData() {
     updates['/images/' + newPostKey] = postData;
     updates['/user-images/' + userID + '/' + newPostKey] = postData;
     
+    alert("Image Saved...");
     return firebase.database().ref().update(updates);
 }

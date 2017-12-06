@@ -1,4 +1,4 @@
-    <!DOCKTYPE html>
+<!DOCKTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -57,7 +57,9 @@
                 </div>
             </div>
             <div class="w3-display-bottomleft w3-padding-large">
-                Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">microsoftazure.com</a>
+                Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">Microsoft Azure, </a>
+                <a href="https://responsivevoice.com/" target="_blank">ResponsiveVoice, </a>
+                <a href=https://cloud.google.com/translate/docs/ target="_blank">Google</a>
             </div>
         </div>
         
@@ -75,26 +77,12 @@
                         <img id="sourceImage" width="400" />
                     </div>
                     <div class="modal-footer">
-                        <div class="btn-group" role="group" aria-label="..." style="float: left">
-                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Languages...
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" id="language" aria-labelledby="dropdownMenu2">
-                                <li>
-                                    <a href="#" value="en">English</a>
-                                </li>
-                                <li>
-                                    <a href="#" value="es">Spanish</a>
-                                </li>
-                                <li>
-                                    <a href="#" value="de">German</a>
-                                </li>
-                                <li>
-                                    <a href="#" value="kr">Korean</a>
-                                </li>
-                            </ul>
-                        </div>
+                        <div id="google_translate_element"></div>
+                        <script type="text/javascript">
+                            function googleTranslateElementInit() {
+                                new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'de,en,es,fr,it', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+                            }
+                        </script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
                         <button type="button" class="btn btn-default" id="play-button">
                             <i class="fa fa-play" aria-hidden="true"></i>
                         </button>

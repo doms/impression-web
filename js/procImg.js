@@ -170,7 +170,6 @@ function processImage() {
                 "</h1>" 
             );
               descrip = accurateResults.data.description.captions[0].text;
-              alert(descrip);
 
             // programmatically fill input form for /save
             $("input[name='url']").val(sourceImageUrl);
