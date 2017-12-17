@@ -1,14 +1,29 @@
-const microsoftApiKey = "9e1166d642c946c182e75b8cc4cf5dda";
+const microsoftApiKey = "34797515fa304ab181cfbc9b8fa00f7f";
 const googleApiKey = "AIzaSyAegC2YEg7TclrJD_sDnJCSSyNjihnf93A";
+
+var pleaseWork;
+var micRes, gooRes, descrip;
+
+function myFunction() {
+    myVar = setTimeout(showPage, 300);
+}
+
+function showPage() {
+  document.getElementById("loader").style.display = "none";
+  document.getElementById("myDiv").style.display = "block";
+}
 
 function compareResults(microsoft, google) {
   // parse results
   var microsoftResults = JSON.parse(JSON.stringify(microsoft, null, 2));
   var googleResults = JSON.parse(JSON.stringify(google, null, 2));
 
+    micRes = microsoftResults.description.captions[0].confidence * 100;
+    gooRes = googleResults.responses[0].labelAnnotations[0].score * 100;
+    
   console.log(
-    "microsoft:",
-    microsoftResults.description.captions[0].confidence * 100
+      "microsoft:",
+      microsoftResults.description.captions[0].confidence * 100
   );
   console.log(
     "google:",
@@ -23,8 +38,8 @@ function compareResults(microsoft, google) {
 }
 
 function processImage() {
-  var uriBase =
-    "https://westcentralus.api.cognitive.microsoft.com/vision/v1.0/analyze";
+  var uriBase = "https://westcentralus.api.cognitive.microsoft.com/vision/v1.0/analyze";
+    
 
   // Request parameters.
   var params = {
@@ -40,7 +55,7 @@ function processImage() {
 
   // add photo to img tag if from URL
   if (sourceImageUrl) {
-    document.querySelector("#sourceImage").src = sourceImageUrl;
+    pleaseWork = document.querySelector("#sourceImage").src = sourceImageUrl;
   }
 
   // dynamically create request header
@@ -83,7 +98,7 @@ function processImage() {
         // remove base64 tag
         var formattedInput = preview.replace(/(.*,)/, "");
         console.log("Formatted:", formattedInput);
-
+          pleaseWork = formattedInput;
         requests = {
           requests: [
             {
@@ -124,7 +139,6 @@ function processImage() {
 
         // Might have to set size....
         beforeSend: function(xhrObj) {
-          // xhrObj.setRequestHeader("Content-Length", formattedInput.length);
           xhrObj.setRequestHeader("Content-Type", "application/json");
         },
 
@@ -138,9 +152,11 @@ function processImage() {
           // get accurate results
           var accurateResults = compareResults(microsoftResults, googleResults);
           console.log("accurate results:", accurateResults);
-
-          // microsoft
+            
+          // Microsoft
           if (accurateResults.name === "microsoft") {
+              if(accurateResults.data.description.captions[0].confidence * 100 < 80)
+                  alert("Microsoft accuracy of: "+accurateResults.data.description.captions[0].confidence * 100+" is below 80%");
             $(".modal-body").append(
               "<h1 id='results'>" +
                 "I am <strong>" +
@@ -151,14 +167,9 @@ function processImage() {
                 "</h1>" +
                 "<h1 id='api-description' style='display: none;'>" +
                 accurateResults.data.description.captions[0].text +
-                "</h1>" +
-                "<form action=/save method='post' id='submit-form' style='display: none;'>" +
-                "<input type='text' name='url'/>" +
-                "<input type='text' name='confidence'/>" +
-                "<input type='text' name='text'/>" +
-                "<input type='text' name='tags'/>" +
-                "</form>"
+                "</h1>" 
             );
+              descrip = accurateResults.data.description.captions[0].text;
 
             // programmatically fill input form for /save
             $("input[name='url']").val(sourceImageUrl);
@@ -172,6 +183,8 @@ function processImage() {
             $("input[name='tags']").val(accurateResults.data.description.tags);
           } else {
             // Google had better results...
+              if(accurateResults.data.responses[0].labelAnnotations[0].score * 100 < 80)
+                  alert("Google accuracy of: "+(accurateResults.data.responses[0].labelAnnotations[0].score * 100).toFixed(2) +" is below 80%");
             $(".modal-body").append(
               "<h1 id='results'>" +
                 "I am <strong>" +
@@ -185,14 +198,9 @@ function processImage() {
                 "<h1 id='api-description' style='display: none;'>" +
                 accurateResults.data.responses[0].labelAnnotations[0]
                   .description +
-                "</h1>" +
-                "<form action=/save method='post' id='submit-form' style='display: none;'>" +
-                "<input type='text' name='url'/>" +
-                "<input type='text' name='confidence'/>" +
-                "<input type='text' name='text'/>" +
-                "<input type='text' name='tags'/>" +
-                "</form>"
+                "</h1>" 
             );
+              descrip = accurateResults.data.responses[0].labelAnnotations[0].description;
 
             // programmatically fill input form for /save
             $("input[name='url']").val(sourceImageUrl);
@@ -213,10 +221,12 @@ function processImage() {
       });
     }
   });
-
+    
   // clear input
   document.getElementById("url").value = "";
 }
+
+
 
 /*
   Input requirements:

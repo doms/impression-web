@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="utf-8">
+    <title>Impression</title>
+    <meta name="description" content="learning from images">
+    <meta name="author" content="Anena Sims, Ranjeev Neurekar & Dominic Young">
+    <!-- Responsive meta tag: ensures proper rendering and touch zooming for all devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Stylesheets for Home Page -->
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <!-- Stylesheets for Authentication Modal -->
+    <link rel="stylesheet" href="css/authModal.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- Stylesheets for Login Tabs -->
+    <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+</head>
+
+<body>
+    <div class="bgimg w3-display-container w3-animate-opacity w3-text-white"> <!-- Home Screen Design -->
+        <div class="w3-display-topleft w3-padding-large w3-xlarge"> <!-- Home Screen Buttons -->
+            <button class="btnHome" id="btnAuth" data-toggle="modal" data-target="#mymodal">Log in / Sign Up</button> 
+            <button class="btnHome" id="btnLookUp">Quick Lookup</button>
+        </div>
+        <div class="w3-display-middle">
+            <h1 class="w3-jumbo w3-animate-top" style="margin: 1% auto;">IMPRESSION</h1>
+            <hr class="w3-border-white" style="margin:auto;width:60%">
+            <p class="w3-large w3-center">learning from images</p>
+        </div>
+        <div class="w3-display-bottomleft w3-padding-large">
+            Powered by <a href="https://firebase.google.com/" target="_blank">firebase</a>
+        </div>
+    </div>
+    
+    <!-- Login / Sign Up Modal -->
+    <div class="modal" id="mymodal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" type="button" data-dismiss="modal">x</button>
+                    <h1 class="modal-title">Login / Sign Up</h2>
+
+                    <!-- Login / Sign Up Tabs -->
+                    <div class="form"> 
+                        <ul class="tab-group">
+                            <li class="tab active"><a href="#signup">Sign Up</a></li>
+                            <li class="tab"><a href="#login">Log In</a></li>
+                        </ul>
+                        
+                        <!-- tab-content -->
+                        <div class="tab-content">  
+                            <div id="signup">   <!-- Sign Up Tabs -->
+                                <h1 class="tab-title">Sign Up, it's Free!</h1>
+          
+                                <div action="/" method="post">
+                                    <div class="field-wrap">
+                                        <label>Email Address<span class="req">*</span></label>
+                                        <input class="input" id="newEmail" type="email"required autocomplete="off"/>
+                                    </div>
+                                    <div class="field-wrap">
+                                        <label>Set A Password<span class="req">*</span></label>
+                                        <input class="input" id="newPassword" type="password"required autocomplete="off"/>
+                                    </div>
+                                    <button id="btnSignUp" class="button button-block">Get Started</button>
+                                </div>
+                            </div>
+        
+                            <div id="login">   <!-- Login Tab -->
+                                <h1 class="tab-title">Welcome Back!</h1>
+          
+                                <div action="/" method="post">
+                                    <div class="field-wrap">
+                                        <label>Email Address<span class="req">*</span></label>
+                                        <input class="input" id="txtEmail" type="email"required autocomplete="off"/>
+                                    </div>
+                                    <div class="field-wrap">
+                                        <label>Password<span class="req">*</span></label>
+                                        <input class="input" id="txtPassword" type="password"required autocomplete="off"/>
+                                    </div>
+                                    <p class="forgot"><a href="#">Forgot Password?</a></p> 
+                                    <button id="btnLogin" class="button button-block">Log In</button>
+                                    <button id="btnLogout" class="btn btn-secondary" >Log Out</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>  <!-- End of Tabs --> 
+                </div> 
+                <div class="modal-body"></div>
+            </div>
+        </div>
+    </div>      <!-- End Login / Sign Up Modal -->
+        
+    <!-- Firebase CDN - Login & Database -->
+    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-auth.js"></script>
+    <!-- Jquery CDN - Modal -->
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <!-- Bootstrap CDN - Modal -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+    <script  src="js/auth.js"></script>
+    <script  src="js/index.js"></script>
+</html>

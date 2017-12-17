@@ -1,0 +1,113 @@
+    <!DOCKTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Impression</title>
+        <meta name="description" content="learning from images">
+        <meta name="author" content="Anena Sims, Ranjeev Neurekar & Dominic Young">
+        <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Ensures proper rendering and touch zooming for all devices -->
+        
+        <!-- Stylesheets for Browse Page -->
+        <link rel="stylesheet" href="css/browse.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+        
+        <!-- Stylesheets for Modal -->
+        <link rel="stylesheet" href="stylesheets/modal.css" type="text/css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+        <!-- Responsive CDN - Text to Speech -->
+        <script src="https://code.responsivevoice.org/responsivevoice.js"></script> 
+        <!-- Microsoft CDN - Analyze Image -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>     
+    </head>
+
+	<body>
+        <!-- Browse Screen Design -->
+        <div class="bgimg w3-display-container w3-animate-opacity w3-text-white"> 
+            
+            <!-- Display Email & Logout Button Top Right -->
+            <div class="w3-display-topleft w3-padding-large w3-xlarge"> 
+                <p id="disp-txt"></p> <!-- Email -->
+                <div class="sign-out button">
+                    <button id="btnLogout" class="btnHome">Logout</button>
+                    <button id="btnReturn" class="btnHome">Home</button>
+                    <button id="btnAccount" class="btnHome">Account</button>
+                </div>
+            </div> 
+
+            <!-- file browser & search bar -->
+            <div class="w3-display-middle">
+                <h1 class="w3-jumbo w3-animate-top" style="margin: 1% auto;">IMPRESSION</h1>
+                <hr class="w3-border-white" style="margin:auto;width:60%">
+                <p class="w3-large w3-center">Enter url or browse for file</p>
+                <div class="form-group">
+                    <div class="input-group" id="custom">
+                        <input type="text" onkeyup="handle(event)" class="form-control" id="url" placeholder='Image URL...' />
+                        <span class="input-group-btn">
+                            <button class="btn btn-default btn-choose" id="analyze" type="button" onclick="processImage();">
+                                <i class="fa fa-search-plus" aria-hidden="true" style="color: white ;"></i>
+                            </button>
+                        </span>
+                    </div>
+                    <div class="text-center input-file">
+                        <button type="button" id="btnURL" class="btn btn-primary btn-lg" name="dom-file-upload">Browse...</button>
+                    </div>
+                </div>
+            </div>
+            <div class="w3-display-bottomleft w3-padding-large">
+                Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">Microsoft Azure, </a>
+                <a href="https://responsivevoice.com/" target="_blank">ResponsiveVoice, </a>
+                <a href=https://cloud.google.com/translate/docs/ target="_blank">Google</a>
+            </div>
+        </div>
+        
+        <!-- Image Display Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel">
+            <div class="modal-dialog" id="myDiv" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="ModalLabel">Results</h4>
+                    </div>
+                    <div class="modal-body" id="modal-results">
+                        <img id="sourceImage" width="400" />
+                    </div>
+                    <div class="modal-footer">
+                        <div id="google_translate_element"></div>
+                        <script type="text/javascript">
+                            function googleTranslateElementInit() {
+                                new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'de,en,es,fr,it', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+                            }
+                        </script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+                        <button type="button" class="btn btn-default" id="play-button">
+                            <i class="fa fa-play" aria-hidden="true"></i>
+                        </button>
+                        <button type="button" class="btn btn-default" id="stop-button">
+                            <i class="fa fa-stop" aria-hidden="true"></i>
+                        </button>
+                        <button type="button" id="btnSave" class="btn btn-primary" onclick="writeUserData()">Save Results</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Firebase CDN - Login & Database -->
+        <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-auth.js"></script>
+        <!-- Blob CDN - File handling for image browsing -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/blob-util/1.3.0/blob-util.min.js"></script>
+        <!-- Jquery CDN - Modal -->
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+        <!-- Bootstrap CDN - Modal -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	</body>
+    
+    <script src="js/browse.js"></script>
+    <script src="js/procImg.js"></script>
+    <script src="js/helpers.js"></script>
+    <script src="js/tts.js"></script>
+</html>

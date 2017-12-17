@@ -1,0 +1,57 @@
+.bgimg {
+    background-image: url('/images/sea_surf_sunset_stones.jpg');
+    min-height: 100%;
+    background-position: center;
+    background-size: cover;
+}
+
+body,h1 {font-family: "Raleway", sans-serif}
+
+body, html {
+    height: 100%;
+}
+   
+
+
+.btnHome {
+    background-color: ghostwhite; 
+    border: none;
+    color: black;
+    padding: 10px 10px;
+    text-align: center;
+    font-style: oblique;
+    display: inline-block;
+    font-size: 16px;
+}
+
+#btnURL {
+    margin: 2% auto 0%;
+    background-color: ghostwhite; 
+    border: none;
+    color: black;
+    padding: 10px 10px;
+    text-align: center;
+    font-style: oblique;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+#analyze{
+    background-color: cadetblue; 
+    border: none;
+    color: black;
+    padding: 25% 10px;
+    text-align: center;
+    font-style: oblique;
+    display: inline-block;
+    font-size: 16px;
+}
+
+h1 {
+  margin: 20% auto 0%;
+  text-align: center;
+  font-size: 75px;
+  color: white;
+  /*text-shadow: 0.09em 0.09em #000;*/
+}
